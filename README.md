@@ -38,58 +38,57 @@ date and stock health status.
 	Follows First Expiry First Out (FEFO) logic, displays expiry of earliest expiry 
 only.
 
-	Format:		list
-	Example Output: 	
-Paracetamol 500mg
-  				Total: 350 tablets
- 		 		Earliest Exp: 2030-09-30
-   				Status: Healthy
+	Format:				list
+	Example Output: 	Paracetamol 500mg
+  						Total: 350 tablets
+ 		 				Earliest Exp: 2030-09-30
+   						Status: Healthy
 
-Vyvanse 70mg
-   				Total: 40 pieces
-Earliest Exp: 2026-03-10
-Status: Low Stock
+						Vyvanse 70mg
+   						Total: 40 pieces
+						Earliest Exp: 2026-03-10
+						Status: Low Stock
 
 Deleting a Medication: delete
 Delete a medication completely from the database, using the two methods. 
 
-Format: 		delete n/<NAME> 
-				delete i/<INDEX>
-Example:
-delete Paracetamol q/200 exp/2026-12-31
-delete 1
+	Format: 		delete n/<NAME> 
+					delete i/<INDEX>
+	Example:
+					delete Paracetamol q/200 exp/2026-12-31
+					delete 1
 	Example Output: 
-Deleted product:
-Paracetamol 500mg
+					Deleted product:
+					Paracetamol 500mg
 
 Adding a Medication Batch: batch
-	Adds a batch of medical stock.
+Adds a batch of medical stock.
 
-Format: 		batch n/<NAME> q/<QUANTITY> exp/<EXPIRY_DATE>
+	Format: 		batch n/<NAME> q/<QUANTITY> exp/<EXPIRY_DATE>
 
-Example:
-batch Paracetamol q/200 exp/2026-12-31
-Example Output: 
-Added batch to Paracetamol 500mg
-Quantity: 200
-Expiry: 2026-12-31
+	Example:
+					batch Paracetamol q/200 exp/2026-12-31
+					Example Output: 
+					Added batch to Paracetamol 500mg
+					Quantity: 200
+					Expiry: 2026-12-31
 
 Withdrawing Medication from the System: withdraw, wtd
 Withdraws a quantity of the keyed in medication from the database. 
 
-Format: 		wtd PRODUCT NAME q/QUANTITY
-			withdraw PRODUCT NAME q/QUANTITY
-			(Both withdraw and wtd can be used as command words in the CLI)
+	Format: 		wtd PRODUCT NAME q/QUANTITY
+					withdraw PRODUCT NAME q/QUANTITY
+				(Both withdraw and wtd can be used as command words in the CLI)
 	Example:
-wtd Paracetamol q/50
-Example Output: 
-Withdrawn 50 tablets.
-Remaining total: 300 tablets
+					wtd Paracetamol q/50
+					Example Output: 
+					Withdrawn 50 tablets.
+					Remaining total: 300 tablets
 
 Quitting the Program: exit, quit
 Type quit in the CLI to end the program.
 
-Format: 	 	exit
+	Format: 	 	exit
 
 Saving the data
 – to be added – 
