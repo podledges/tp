@@ -1,6 +1,12 @@
 # MediStock
 
-Prerequisites: JDK 17 (use the exact version), update Intellij to the most recent version.
+Overview
+MediStock is a command-line inventory system for pharmacists and clinic staff to manage medicine stock by batch and expiry date.
+
+Prerequisites
+JDK 17 (use the exact version), update Intellij to the most recent version.
+
+Manual Set-up
 
 1. **Ensure Intellij JDK 17 is defined as an SDK**, as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 17 in a previous Intellij project.
 1. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
