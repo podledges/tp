@@ -83,9 +83,9 @@ Adds a batch of a specific item to the inventory.
   
 ### Withdrawing Medication from the Inventory: `withdraw`, `wtd`
 Withdraws a quantity of the keyed in medication from the database. 
-* **Format:** `withdraw <PRODUCT_NAME> q/<QUANTITY>`  ***or*** <br>
+* **Format:** `withdraw n/NAME q/QUANTITY`  ***or*** <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  `wtd <PRODUCT_NAME> q/<QUANTITY>`
+  `wtd n/NAME q/QUANTITY`
 * **Example:** `wtd Paracetamol 500mg q/50`
 * **Example Output:**
 
@@ -137,7 +137,7 @@ The following table summarizes the available commands:
 | **LIST INVENTORY**     | `list`                                  | `list`                               |
 | **DELETE ITEM**        | `delete n/NAME` or `delete i/INDEX`     | `delete n/Vyvanse u/70mg`            |
 | **ADD BATCH OF ITEMS** | `batch n/NAME q/QUANTITY d/EXPIRY_DATE` | `batch n/Vyvanse q/200 d/2028-06-07` |
-| **WITHDRAW ITEMS**     | `wtd <PRODUCT_NAME>  q/<QUANTITY>`      | `wtd n/Vyvanse 70mg q/50`            |
+| **WITHDRAW ITEMS**     | `wtd n/NAME  q/QUANTITY`                | `wtd n/Vyvanse 70mg q/50`            |
 | **QUIT**               | `exit` or `quit`                        | `exit`                               |
 
 > **EXPIRY_DATE must** be formatted as **YYYY-MM-DD**. <br>
