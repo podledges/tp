@@ -1,8 +1,6 @@
 # **User Guide**
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have **Java 17** or above installed. <br> 
     ***Mac users*** : Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html)
 2. Down the latest version of `MediStock` from [here](https://github.com/AY2526S2-CS2113-W10-2/tp/releases).
@@ -32,6 +30,7 @@ List all items in the inventory with their corresponding stock quantity, earlies
 date and stock health status.
 * **Format:** `list`
 * **Example Output:**
+
     ```text
     Current Pharmaceutical Inventory: 
     ____________________________________________________________
@@ -44,7 +43,7 @@ date and stock health status.
           Earliest Exp: 2028-06-07
           Status: Critical
     ____________________________________________________________
-  ```
+   ```
 
 ### Deleting a Pharmaceutical: `delete`
 Removes a task from your list permanently.
