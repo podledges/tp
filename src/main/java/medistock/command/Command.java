@@ -6,11 +6,9 @@ import medistock.ui.Ui;
 
 public abstract class Command {
 
-    protected boolean isExit = false;
-
     public abstract void execute(Inventory inventory, Ui ui) throws MediStockException;
 
     public boolean isExit() {
-        return isExit;
+        return false;
     };
 }
