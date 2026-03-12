@@ -9,6 +9,7 @@ import medistock.command.ListCommand;
 import medistock.exception.MediStockException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     public static Command parseCommand(String input) throws MediStockException {
@@ -73,16 +74,33 @@ public class Parser {
         int quantIndex = text.indexOf("q/");
         int expiryIndex = text.indexOf("d/");
 
-        if (nameIndex == -1 || quantIndex == -1) {
+        if (nameIndex == -1 || quantIndex == -1 || expiryIndex == -1) {
             throw new MediStockException("Invalid batch format. Use: batch n/NAME q/QUANTITY d/EXPIRY_DATE");
         }
+
         if (!(nameIndex < quantIndex && quantIndex < expiryIndex)) {
-            throw new MediStockException("Use batch format: batch n/NAME q/QUANTITY d/EXPIRY_DATE");
+            throw new MediStockException("Ensure the arguments are in the correct order: n/NAME q/QUANTITY d/EXPIRY_DATE");
         }
 
-        String name = getArgument(text, nameIndex, quantIndex);
-        int quant = Integer.parseInt(getArgument(text, quantIndex, expiryIndex));
-        LocalDate expiryDate = LocalDate.parse(getArgument(text, expiryIndex));
+        String name = getArgument(text, nameIndex, quantIndex).trim();
+
+        if (quantIndex <= 0) {
+            throw new MediStockException("Invalid quantity, Please enter a positive whole number for the quantity ");
+        }
+
+        int quant;
+        try {
+            quant = Integer.parseInt(getArgument(text, quantIndex, expiryIndex).trim());
+        } catch (NumberFormatException e) {
+            throw new MediStockException("Invalid quantity. Please enter a valid whole number for the quantity.");
+        }
+
+        LocalDate expiryDate;
+        try {
+            expiryDate = LocalDate.parse(getArgument(text, expiryIndex).trim());
+        } catch (DateTimeParseException e) {
+            throw new MediStockException("Invalid expiry date. Please use a valid format (e.g., YYYY-MM-DD).");
+        }
 
         return new BatchCommand(name, quant, expiryDate);
     }
