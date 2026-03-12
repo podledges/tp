@@ -32,6 +32,7 @@ List all items in the inventory with their corresponding stock quantity, earlies
 date and stock health status.
 * **Format:** `list`
 * **Example Output:**
+
     ```text
     Current Pharmaceutical Inventory: 
     ____________________________________________________________
