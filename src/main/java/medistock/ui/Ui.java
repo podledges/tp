@@ -117,8 +117,16 @@ public class Ui {
 
     public static void printCreate(String name, String unit, int minimumThreshold) {
         printLine();
-        System.out.println(String.format("Product created:" + name + " (" + unit + ")\n" + "Minimum threshold: "
-                + minimumThreshold));
+        System.out.printf("Product created:" + name + " (" + unit + ")\n" + "Minimum threshold: "
+                + minimumThreshold + "%n");
+        printLine();
+    }
+
+    public void printDelete(InventoryItem deletedItem) {
+        printLine();
+        System.out.printf("Product deleted:" + deletedItem.getName() + " (" + deletedItem.getUnit() + ")\n"
+                + "Minimum threshold: "
+                + deletedItem.getMinimumThreshold() + "%n");
         printLine();
     }
 

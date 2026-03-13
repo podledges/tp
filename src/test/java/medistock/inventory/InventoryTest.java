@@ -45,4 +45,8 @@ class InventoryTest {
     @Test
     void getSize() {
     }
+
+    @Test
+    void deleteItem_validItem_success() {
+    }
 }

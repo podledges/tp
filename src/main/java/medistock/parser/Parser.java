@@ -3,6 +3,8 @@ package medistock.parser;
 import medistock.command.BatchCommand;
 import medistock.command.Command;
 import medistock.command.CreateCommand;
+import medistock.command.DeleteCommandIndex;
+import medistock.command.DeleteCommandName;
 import medistock.command.ExitCommand;
 import medistock.command.WithdrawCommand;
 import medistock.command.ListCommand;
@@ -21,6 +23,8 @@ public class Parser {
             return prepareBatch(text);
         } else if (text.startsWith("withdraw")) {
             return prepareWithdraw(text);
+        } else if (text.startsWith("delete")) {
+            return prepareDeleteName(text);
         } else if (text.equals("list")) {
             return new ListCommand();
         } else if (text.startsWith("exit") || text.startsWith("quit")) {
@@ -187,6 +191,45 @@ public class Parser {
         }
 
         return new WithdrawCommand(name, quant);
+    }
+
+    private static Command prepareDeleteName(String text) throws MediStockException {
+        int nameIndex = text.indexOf("n/");
+
+        if (nameIndex == -1) {
+            throw new MediStockException("Invalid delete format. Use: delete 'n/NAME' or 'i/INDEX'");
+        }
+
+        String name = getArgument(text, nameIndex);
+
+        if (name.isEmpty()) {
+            throw new MediStockException("Name must not be empty.");
+        }
+
+        return new DeleteCommandName(name);
+    }
+
+    private static Command prepareDeleteIndex(String text) throws MediStockException {
+        int nameIndex = text.indexOf("i/");
+
+        if (nameIndex == -1) {
+            throw new MediStockException("Invalid delete format. Use: delete 'n/NAME' or 'i/INDEX'");
+        }
+
+        String indexText = getArgument(text, nameIndex);
+        int index;
+
+        try {
+            index = Integer.parseInt(indexText);
+        } catch (NumberFormatException e) {
+            throw new MediStockException("Index must be a valid number.");
+        }
+
+        if (index <= 0 ) {
+            throw new MediStockException("Invalid index! Please enter a valid index.");
+        }
+
+        return new DeleteCommandIndex(index);
     }
 
 }

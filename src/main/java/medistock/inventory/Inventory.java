@@ -63,12 +63,31 @@ public class Inventory {
      * @param name The item name.
      * @throws MediStockException If the item does not exist.
      */
-    public void removeItem(String name) throws MediStockException {
+    public InventoryItem deleteItem(String name) throws MediStockException {
         String key = normalizeName(name);
         if (!items.containsKey(key)) {
             throw new MediStockException("Product not found: " + name);
         }
+        InventoryItem deletedItem = items.get(key);
         items.remove(key);
+        return deletedItem;
+    }
+
+    public InventoryItem deleteItem(int index) throws MediStockException {
+        if (index <= 0 || index > items.size()) {
+            throw new MediStockException("Index entered out of bounds! Valid indices: 1 to " + items.size());
+        }
+        int i = 0;
+        InventoryItem deletedItem;
+        for (String key : items.keySet()) {
+            if (i == index) {
+                deletedItem = items.get(key);
+                items.remove(key);
+                return deletedItem;
+            }
+            i++;
+        }
+        throw new MediStockException("Error with index!");
     }
 
     /**
