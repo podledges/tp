@@ -12,12 +12,6 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private static final String EXIT_MESSAGE =
-            "Inventory saved\nThank you for using MediStock, have a nice day!";
-
-    private static final String WELCOME_MESSAGE =
-            "Welcome to medistock \nType <help> to see the list of available commands.";
-
     public static final String BATCH_FORMAT =
             "Format: batch n/NAME q/QUANTITY d/EXPIRY_DATE(YYYY-MM-DD)";
 
@@ -29,6 +23,11 @@ public class Ui {
 
     public static final String DELETE_FORMAT =
             "Format: delete 'n/NAME' or 'i/INDEX'";
+    private static final String EXIT_MESSAGE =
+            "Inventory saved\nThank you for using MediStock, have a nice day!";
+
+    private static final String WELCOME_MESSAGE =
+            "Welcome to medistock \nType <help> to see the list of available commands.";
 
     private final Scanner scanner;
 

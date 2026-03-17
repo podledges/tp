@@ -1,6 +1,14 @@
 package medistock.parser;
 
-import medistock.command.*;
+import medistock.command.BatchCommand;
+import medistock.command.Command;
+import medistock.command.CreateCommand;
+import medistock.command.DeleteCommandIndex;
+import medistock.command.DeleteCommandName;
+import medistock.command.HelpCommand;
+import medistock.command.ExitCommand;
+import medistock.command.WithdrawCommand;
+import medistock.command.ListCommand;
 import medistock.exception.MediStockException;
 import medistock.ui.Ui;
 
@@ -25,8 +33,7 @@ public class Parser {
             return new ExitCommand();
         } else if (text.equals("help")) {
             return new HelpCommand();
-        }
-        else {
+        } else {
             throw new MediStockException("Unknown command.");
         }
 
