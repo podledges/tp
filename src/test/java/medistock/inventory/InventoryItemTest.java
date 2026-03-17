@@ -54,7 +54,7 @@ public class InventoryItemTest {
     }
 
     @Test
-    void withdraw_expiredBatchIgnored_insufficientValidStock_throwsException() {
+    void withdraw_insufficientValidStock_throwsException() {
         InventoryItem item = new InventoryItem("Aspirin 500mg", "Tablet", 10);
         item.addBatch(new Batch(1, 10, LocalDate.now().minusDays(1)));
         item.addBatch(new Batch(2, 5, LocalDate.now().plusDays(10)));
