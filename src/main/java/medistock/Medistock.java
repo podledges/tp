@@ -3,11 +3,11 @@ package medistock;
 import medistock.command.Command;
 import medistock.exception.MediStockException;
 import medistock.inventory.Inventory;
+import medistock.logscentre.LogsCentre;
 import medistock.parser.Parser;
 import medistock.storage.Storage;
 import medistock.ui.Ui;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
 
@@ -57,7 +57,9 @@ public class Medistock {        // I think we need to change name of class and f
     /**
      * Main entry-point for the java.medistick.Medistock application.
      */
-    public static void main(String[] args) throws IOException, MediStockException {
+    public static void main(String[] args) {
+        LogsCentre.initLogging();
+
         Medistock mediStock = new Medistock(Path.of("./data/Inventory.txt"));
         mediStock.boot();
     }
