@@ -175,6 +175,9 @@ public class InventoryItem {
             } else {
                 i++;
             }
+            /// Im sorry but Podles has broken the code, as I think we should not be removing expired while withdrawing
+            //Todo: May you pls update the method to handle this.
+            /// If you want Podles to update this instead let Podles know
         }
     }
 

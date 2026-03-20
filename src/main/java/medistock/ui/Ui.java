@@ -80,10 +80,6 @@ public class Ui {
         printLine();
     }
 
-    public void printEarliestExpiry(InventoryItem item) {
-
-    }
-
     public void printExitMessage() {
         printLine();
         System.out.println(EXIT_MESSAGE);
