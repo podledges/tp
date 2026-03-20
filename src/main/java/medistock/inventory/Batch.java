@@ -38,6 +38,14 @@ public class Batch {
         return expiryDate;
     }
 
+    /**
+     * @return true if batch has expired, relative to present day.
+     */
+    public boolean isExpired() {
+        LocalDate present = LocalDate.now();
+        return expiryDate.isBefore(present);
+    }
+
     public void reduceQuantity(int quantity) {
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity to reduce cannot be negative");

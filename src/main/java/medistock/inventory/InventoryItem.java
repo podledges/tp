@@ -162,19 +162,16 @@ public class InventoryItem {
      * A batch is considered expired if its expiry date is not after today.
      */
     private void sortAndRemoveExpiredBatches() {
-        LocalDate today = LocalDate.now();
-
         // Earliest first
         batches.sort(Comparator.comparing(Batch::getExpiryDate));
 
         // Remove all expired batches
         int i = 0;
         while (i < batches.size()) {
-            if (batches.get(i).getExpiryDate().isBefore(today)) {
+            if (batches.get(i).isExpired()) {
                 System.out.println("Please remove expired batch "
-                        + batches.get(i).getBatchNumber() + " (expired: "
+                        + batches.get(i).getBatchNumber() + " (Expired: "
                         + batches.get(i).getExpiryDate() + ")");
-                batches.remove(i);
             } else {
                 i++;
             }
