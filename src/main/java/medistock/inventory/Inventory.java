@@ -97,7 +97,7 @@ public class Inventory {
         int i = 0;
         InventoryItem deletedItem;
         for (String key : items.keySet()) {
-            if (i == index) {
+            if (i == index - 1) {
                 deletedItem = items.get(key);
                 items.remove(key);
                 return deletedItem;
