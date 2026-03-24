@@ -5,6 +5,9 @@ import medistock.inventory.Inventory;
 import medistock.inventory.InventoryItem;
 import medistock.ui.Ui;
 
+/**
+ * Command to delete an inventory item by its name.
+ */
 public class DeleteCommandName extends Command {
     private final String name;
 

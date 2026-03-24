@@ -5,6 +5,9 @@ import medistock.inventory.Inventory;
 import medistock.inventory.InventoryItem;
 import medistock.ui.Ui;
 
+/**
+ * Command to create a new inventory item with specified name, unit, and minimum threshold.
+ */
 public class CreateCommand extends Command {
     private final String name;
     private final String unit;

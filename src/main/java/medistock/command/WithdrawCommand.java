@@ -5,6 +5,9 @@ import medistock.inventory.Inventory;
 import medistock.inventory.InventoryItem;
 import medistock.ui.Ui;
 
+/**
+ * Command to withdraw a specified quantity of an inventory item.
+ */
 public class WithdrawCommand extends Command {
     private final String name;
     private final int quantity;

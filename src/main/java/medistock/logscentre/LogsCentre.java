@@ -5,6 +5,9 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * Manages application logging configuration and file output.
+ */
 public class LogsCentre {
     private static final Logger logger = Logger.getLogger(LogsCentre.class.getName());
 

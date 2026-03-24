@@ -1,5 +1,8 @@
 package medistock.ui;
 
+/**
+ * Contains the ASCII art logo for the MediStock application.
+ */
 public final class Logo {
 
     public static final String LOGO =
