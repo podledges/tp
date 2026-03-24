@@ -20,6 +20,9 @@ public class Inventory {
     
     private final Map<String, InventoryItem> items;
 
+    /**
+     * Constructs an empty Inventory.
+     */
     public Inventory() {
         this.items = new HashMap<>();
     }
@@ -90,6 +93,13 @@ public class Inventory {
         return deletedItem;
     }
 
+    /**
+     * Removes the item at the specified index in the inventory.
+     *
+     * @param index The 1-based index of the item to delete.
+     * @return The deleted inventory item.
+     * @throws MediStockException If the index is out of bounds.
+     */
     public InventoryItem deleteItem(int index) throws MediStockException {
         if (index <= 0 || index > items.size()) {
             throw new MediStockException("Index entered out of bounds! Valid indices: 1 to " + items.size());
@@ -125,6 +135,13 @@ public class Inventory {
         return items.size();
     }
 
+    /**
+     * Normalizes an item name by trimming whitespace and converting to lowercase.
+     * Used internally to ensure consistent key lookups.
+     *
+     * @param name The item name to normalize.
+     * @return The normalized name.
+     */
     private String normalizeName(String name) {
         assert name != null : ASSERT_NAME_NOT_NULL;
         return name.trim().toLowerCase();
