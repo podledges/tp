@@ -4,8 +4,10 @@ import medistock.exception.MediStockException;
 import medistock.inventory.Batch;
 import medistock.inventory.Inventory;
 import medistock.inventory.InventoryItem;
+import medistock.storage.Storage;
 import medistock.ui.Ui;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,20 +26,24 @@ public class BatchCommand extends Command {
     }
 
     @Override
-    public void execute(Inventory inventory, Ui ui, List<String> histories) throws MediStockException {
-
+    public void execute(Inventory inventory, Ui ui, Storage storage, List<String> histories) throws MediStockException {
         if (!inventory.hasItem(this.name)) {
             throw new MediStockException("Item '" + this.name + "' does not exist in inventory." +
                     " Please add the item first.");
         }
+        try {
+            InventoryItem item = inventory.getItem(name);
+            item.sortAndMarkExpiredBatches();
+            int batchNumber = item.getTotalBatchQuantity() + 1;
+            Batch newBatch = new Batch(batchNumber, quantity, expiryDate);
+            item.addBatch(newBatch);
+            ui.printBatch(inventory, item, quantity, expiryDate);
+            histories.add(toHistoryString(item.getUnit()));
 
-        InventoryItem item = inventory.getItem(name);
-        item.sortAndMarkExpiredBatches();
-        int batchNumber = item.getTotalBatchQuantity() + 1;
-        Batch newBatch = new Batch(batchNumber, quantity, expiryDate);
-        item.addBatch(newBatch);
-        ui.printBatch(inventory, item, quantity, expiryDate);
-        histories.add(toHistoryString(item.getUnit()));
+            storage.saveToFile(newBatch);
+        } catch (IOException e) {
+            throw new MediStockException("Failed to save to file: " + e.getMessage());
+        }
     }
 
     public String toHistoryString(String unit) {
@@ -45,3 +51,4 @@ public class BatchCommand extends Command {
                 + expiryDate + ".";
     }
 }
+

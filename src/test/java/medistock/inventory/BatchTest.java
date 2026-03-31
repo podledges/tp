@@ -2,10 +2,13 @@ package medistock.inventory;
 
 import medistock.exception.MediStockException;
 import medistock.parser.Parser;
+import medistock.storage.Storage;
 import medistock.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import medistock.command.BatchCommand;
+
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +55,7 @@ public class BatchTest {
     void execute_existingItem_increasesQuantity() throws MediStockException {
         Inventory inventory = new Inventory();
         Ui ui = new Ui();
+        Storage storage = new Storage(Path.of("./data/Inventory.txt"));
         List<String> histories = new ArrayList<>();
 
         InventoryItem existingItem = new InventoryItem("Aspirin 500mg", "Tablets", 200);
@@ -60,7 +64,7 @@ public class BatchTest {
         LocalDate date = LocalDate.parse("2028-06-07");
         BatchCommand command = new BatchCommand("Aspirin 500mg", 50, date);
 
-        command.execute(inventory, ui, histories);
+        command.execute(inventory, ui, storage, histories);
 
         InventoryItem updatedItem = inventory.getItem("Aspirin 500mg");
         assertEquals(50, updatedItem.getQuantity());
@@ -71,11 +75,12 @@ public class BatchTest {
         Inventory inventory = new Inventory();
         Ui ui = new Ui();
         List<String> histories = new ArrayList<>();
+        Storage storage = new Storage(Path.of("./data/Inventory.txt"));
 
         LocalDate date = LocalDate.parse("2028-06-07");
         BatchCommand command = new BatchCommand("Aspirin 500mg", 50, date);
 
         assertThrows(MediStockException.class,
-                () -> command.execute(inventory, ui, histories));
+                () -> command.execute(inventory, ui, storage, histories));
     }
 }

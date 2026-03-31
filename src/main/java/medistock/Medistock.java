@@ -45,28 +45,31 @@ public class Medistock {        // I think we need to change name of class and f
      * Starts the main application loop. Continuously reads user input, parses commands, and executes them
      * Does so, until an exit command is given.
      */
-    public void boot() {
+    public void boot() throws IOException, MediStockException {
         ui.greet();
+        storage.initializeInventory(inventory);
+
         boolean isRunning = true;
 
         while (isRunning) {
             try {
                 String input = ui.getInput();
                 Command command = Parser.parseCommand(input);
-                command.execute(inventory, ui, histories);
+                command.execute(inventory, ui, storage, histories);
                 if (input.equals("exit") || input.equals("quit")) {
                     isRunning = false;
                 }
             } catch (MediStockException e) {
                 ui.printError(e.getMessage());
             }
-        }
-        try {
-            historyStorage.save(histories);
-        } catch (IOException e) {
-            System.out.println("Error saving history.");
+            try {
+                historyStorage.save(histories);
+            } catch (IOException e) {
+                System.out.println("Error saving history.");
+            }
         }
         exit();
+
     }
 
     /**
@@ -79,10 +82,11 @@ public class Medistock {        // I think we need to change name of class and f
     /**
      * Main entry-point for the java.medistick.Medistock application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, MediStockException {
         LogsCentre.initLogging();
 
         Medistock mediStock = new Medistock(Path.of("./data/Inventory.txt"), "./data/History.txt");
         mediStock.boot();
     }
 }
+

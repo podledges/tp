@@ -1,5 +1,7 @@
 package medistock.inventory;
 
+import medistock.storage.Storable;
+
 import java.time.LocalDate;
 
 /**
@@ -7,7 +9,7 @@ import java.time.LocalDate;
  * quantity, and expiry date. Batches are immutable once created except for
  * quantity.
  */
-public class Batch {
+public class Batch implements Storable {
     private final int batchNumber;
     private int quantity;
     private final LocalDate expiryDate;
@@ -56,5 +58,12 @@ public class Batch {
         }
         this.quantity -= quantity;
     }
+
+    @Override
+    public String toFileFormat() {
+        return String.format("%d | %s | %tF", this.batchNumber, this.quantity, this.expiryDate);
+    }
+
+
 
 }

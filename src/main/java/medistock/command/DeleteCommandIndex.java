@@ -1,10 +1,12 @@
 package medistock.command;
 
+import java.io.IOException;
 import java.util.List;
 
 import medistock.exception.MediStockException;
 import medistock.inventory.Inventory;
 import medistock.inventory.InventoryItem;
+import medistock.storage.Storage;
 import medistock.ui.Ui;
 
 /**
@@ -18,10 +20,12 @@ public class DeleteCommandIndex extends Command {
     }
 
     @Override
-    public void execute(Inventory inventory, Ui ui, List<String> histories) throws MediStockException {
+    public void execute(Inventory inventory, Ui ui, Storage storage, List<String> histories)
+                    throws MediStockException, IOException {
         InventoryItem deletedItem = inventory.deleteItem(index);
         ui.printDelete(deletedItem);
         histories.add(toHistoryString(deletedItem.getName()));
+        storage.saveToFile(inventory);
     }
 
     public String toHistoryString(String name) {

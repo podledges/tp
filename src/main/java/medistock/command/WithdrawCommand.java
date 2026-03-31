@@ -1,10 +1,12 @@
 package medistock.command;
 
+import java.io.IOException;
 import java.util.List;
 
 import medistock.exception.MediStockException;
 import medistock.inventory.Inventory;
 import medistock.inventory.InventoryItem;
+import medistock.storage.Storage;
 import medistock.ui.Ui;
 
 /**
@@ -20,11 +22,14 @@ public class WithdrawCommand extends Command {
     }
 
     @Override
-    public void execute(Inventory inventory, Ui ui, List<String> histories) throws MediStockException {
+    public void execute(Inventory inventory, Ui ui, Storage storage,  List<String> histories)
+                    throws MediStockException, IOException {
         InventoryItem item = inventory.getItem(name);
         item.withdraw(quantity);
         ui.printWithdraw(quantity, item);
         histories.add(toHistoryString(item.getUnit()));
+        storage.saveToFile(inventory);
+
     }
 
     public String toHistoryString(String unit) {

@@ -1,9 +1,11 @@
 package medistock.command;
 
+import java.io.IOException;
 import java.util.List;
 
 import medistock.exception.MediStockException;
 import medistock.inventory.Inventory;
+import medistock.storage.Storage;
 import medistock.ui.Ui;
 
 /**
@@ -12,7 +14,8 @@ import medistock.ui.Ui;
  */
 public abstract class Command {
 
-    public abstract void execute(Inventory inventory, Ui ui, List<String> histories) throws MediStockException;
+    public abstract void execute(Inventory inventory, Ui ui, Storage storage, List<String> histories)
+                    throws MediStockException, IOException;
 
     public boolean isExit() {
         return false;

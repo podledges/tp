@@ -98,6 +98,14 @@ public class Inventory {
         return matchedItems;
     }
 
+    public void addBatchToItem(String itemName, Batch batch) throws MediStockException {
+        assert itemName != null : ASSERT_NAME_NOT_NULL;
+        assert batch != null : "Batch should not be null.";
+        InventoryItem item = getItem(itemName);
+        item.addBatch(batch);
+        logger.log(Level.INFO, "Loaded/Added batch to existing item: " + item.getName());
+    }
+
     /**
      * Removes the item with the given name.
      *

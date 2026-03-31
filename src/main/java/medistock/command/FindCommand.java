@@ -3,6 +3,7 @@ package medistock.command;
 import medistock.exception.MediStockException;
 import medistock.inventory.Inventory;
 import medistock.inventory.InventoryItem;
+import medistock.storage.Storage;
 import medistock.ui.Ui;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class FindCommand extends Command {
      * @throws MediStockException If an error occurs during execution.
      */
     @Override
-    public void execute(Inventory inventory, Ui ui, List<String> histories) throws MediStockException {
+    public void execute(Inventory inventory, Ui ui, Storage storage, List<String> histories) throws MediStockException {
         logger.log(Level.INFO, "Executing find command with keyword: " + keyword);
         
         List<InventoryItem> matchedItems = inventory.findItem(keyword);
