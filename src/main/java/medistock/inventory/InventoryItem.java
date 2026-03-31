@@ -129,6 +129,14 @@ public class InventoryItem implements Storable {
         batches.add(batch);
     }
 
+    public InventoryItem copyWithMetadata(String name, String unit, int minimumThreshold) {
+        InventoryItem updatedItem = new InventoryItem(name, unit, minimumThreshold);
+        for (Batch batch : batches) {
+            updatedItem.addBatch(batch);
+        }
+        return updatedItem;
+    }
+
     /**
      * Withdraws the specified quantity from this item's batches.
      * Batches are processed in order of earliest expiry date first.
@@ -236,5 +244,4 @@ public class InventoryItem implements Storable {
         return active;
     }
 }
-
 
