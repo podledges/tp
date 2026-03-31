@@ -49,6 +49,6 @@ public class BatchCommand extends Command {
     public String toHistoryString(String unit) {
         return "Added a batch of " + quantity + " " + unit + " of " + name + " with expiry date "
                 + expiryDate + ".";
-        }
     }
+}
 

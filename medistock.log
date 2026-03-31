@@ -20,3 +20,13 @@ Mar 31, 2026 9:22:45 PM medistock.inventory.Inventory addBatchToItem
 INFO: Loaded/Added batch to existing item: Vyvanse 70mg
 Mar 31, 2026 9:22:51 PM medistock.command.ListCommand execute
 INFO: Executing list command
+Mar 31, 2026 9:25:46 PM medistock.inventory.Inventory addItem
+INFO: Added item: Paracetamol 500mg (Tablets)
+Mar 31, 2026 9:25:46 PM medistock.inventory.Inventory addBatchToItem
+INFO: Loaded/Added batch to existing item: Paracetamol 500mg
+Mar 31, 2026 9:25:46 PM medistock.inventory.Inventory addItem
+INFO: Added item: Vyvanse 70mg (Tablets)
+Mar 31, 2026 9:25:46 PM medistock.inventory.Inventory addBatchToItem
+INFO: Loaded/Added batch to existing item: Vyvanse 70mg
+Mar 31, 2026 9:25:51 PM medistock.command.ListCommand execute
+INFO: Executing list command

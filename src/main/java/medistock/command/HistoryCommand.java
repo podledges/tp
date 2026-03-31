@@ -18,7 +18,8 @@ public class HistoryCommand extends Command {
      */
 
     @Override
-    public void execute(Inventory inventory, Ui ui, Storage storagem, List<String> histories) throws MediStockException {
+    public void execute(Inventory inventory, Ui ui, Storage storage, List<String> histories)
+                    throws MediStockException {
         ui.showHistory(histories);
     }
 }

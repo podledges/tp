@@ -75,7 +75,8 @@ public class Storage {
             }
             else {
                 if (currentItemName.isEmpty()) {
-                    throw new MediStockException("Corrupted save file! Found a batch before any item was declared: " + line);
+                    throw new MediStockException("Corrupted save file! Found a batch before any item was declared: "
+                                    + line);
                 }
                 Batch newBatch = parseItemBatch(line);
                 inventory.addBatchToItem(currentItemName, newBatch);

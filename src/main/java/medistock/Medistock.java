@@ -89,5 +89,5 @@ public class Medistock {        // I think we need to change name of class and f
         Medistock mediStock = new Medistock(Path.of("./data/Inventory.txt"), "./data/History.txt");
         mediStock.boot();
     }
-    }
+}
 

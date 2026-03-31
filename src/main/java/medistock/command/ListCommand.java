@@ -25,7 +25,8 @@ public class ListCommand extends Command {
      * @throws MediStockException If an error occurs during execution.
      */
     @Override
-    public void execute(Inventory inventory, Ui ui, Storage storage,  List<String> histories) throws MediStockException {
+    public void execute(Inventory inventory, Ui ui, Storage storage,  List<String> histories)
+                    throws MediStockException {
         logger.log(Level.INFO, "Executing list command");
         ui.showInventoryList(inventory);
     }
