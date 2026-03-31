@@ -106,6 +106,29 @@ public class Inventory {
         logger.log(Level.INFO, "Loaded/Added batch to existing item: " + item.getName());
     }
 
+    public InventoryItem editItem(String oldName, String newName, String newUnit, Integer newMinimumThreshold)
+            throws MediStockException {
+        assert oldName != null : ASSERT_NAME_NOT_NULL;
+
+        InventoryItem currentItem = getItem(oldName);
+        String updatedName = newName == null ? currentItem.getName() : newName;
+        String updatedUnit = newUnit == null ? currentItem.getUnit() : newUnit;
+        int updatedMinimumThreshold = newMinimumThreshold == null
+                ? currentItem.getMinimumThreshold() : newMinimumThreshold;
+
+        String oldKey = normalizeName(currentItem.getName());
+        String newKey = normalizeName(updatedName);
+
+        if (!oldKey.equals(newKey) && items.containsKey(newKey)) {
+            throw new MediStockException("Product already exists: " + updatedName);
+        }
+
+        InventoryItem updatedItem = currentItem.copyWithMetadata(updatedName, updatedUnit, updatedMinimumThreshold);
+        items.remove(oldKey);
+        items.put(newKey, updatedItem);
+        return updatedItem;
+    }
+
     /**
      * Removes the item with the given name.
      *
