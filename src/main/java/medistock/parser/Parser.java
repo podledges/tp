@@ -5,6 +5,7 @@ import medistock.command.Command;
 import medistock.command.CreateCommand;
 import medistock.command.DeleteCommandIndex;
 import medistock.command.DeleteCommandName;
+import medistock.command.EditCommand;
 import medistock.command.ExitCommand;
 import medistock.command.FindCommand;
 import medistock.command.HelpCommand;
@@ -86,6 +87,16 @@ public class Parser {
      */
     private static String getMinimum(String text, int minIndex) {
         return text.substring(minIndex + 4).trim();
+    }
+
+    private static int getNextIndex(String text, int currentIndex, int... indexes) {
+        int nextIndex = text.length();
+        for (int index : indexes) {
+            if (index > currentIndex && index < nextIndex) {
+                nextIndex = index;
+            }
+        }
+        return nextIndex;
     }
 
     /**
@@ -176,7 +187,41 @@ public class Parser {
     }
 
     private static Command prepareEdit(String text) throws MediStockException {
-        throw new MediStockException("Invalid edit format. " + Ui.EDIT_FORMAT);
+        int oldNameIndex = text.indexOf("o/");
+        int nameIndex = text.indexOf("n/");
+        int unitIndex = text.indexOf("u/");
+        int minIndex = text.indexOf("min/");
+
+        if (oldNameIndex == -1) {
+            throw new MediStockException("Invalid edit format. " + Ui.EDIT_FORMAT);
+        }
+
+        String oldName = text.substring(oldNameIndex + 2,
+                getNextIndex(text, oldNameIndex, nameIndex, unitIndex, minIndex)).trim();
+        String newName = null;
+        String newUnit = null;
+        Integer newMinimumThreshold = null;
+
+        if (nameIndex != -1) {
+            newName = text.substring(nameIndex + 2,
+                    getNextIndex(text, nameIndex, unitIndex, minIndex)).trim();
+        }
+
+        if (unitIndex != -1) {
+            newUnit = text.substring(unitIndex + 2,
+                    getNextIndex(text, unitIndex, minIndex)).trim();
+        }
+
+        if (minIndex != -1) {
+            String minText = getMinimum(text, minIndex);
+            try {
+                newMinimumThreshold = Integer.parseInt(minText);
+            } catch (NumberFormatException e) {
+                throw new MediStockException("Invalid edit format. " + Ui.EDIT_FORMAT);
+            }
+        }
+
+        return new EditCommand(oldName, newName, newUnit, newMinimumThreshold);
     }
 
     /**
