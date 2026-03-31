@@ -49,6 +49,10 @@ public class Storage {
                     bw.write(batch.toFileFormat());
                     bw.newLine();
                 }
+                for (Batch batch : item.getExpiredBatches()) {
+                    bw.write(batch.toFileFormat());
+                    bw.newLine();
+                }
                 bw.newLine();
             }
         }
