@@ -34,6 +34,10 @@
 This developer guide was inspired by 
 (https://se-education.org/addressbook-level4/DeveloperGuide.html#design)
 
+Tools that helped with the creation of the MediStocks logo: <br>
+(https://www.asciiart.eu/text-to-ascii-art) <br>
+(https://www.asciiart.eu/image-to-ascii)
+
 ## Design
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
@@ -43,7 +47,37 @@ This developer guide was inspired by
 ### Feature: Create Item
 
 ### Feature: Add Batch
+#<SEQUENCE DIAGRAM> 
+**Purpose:** Add a new batch of stock to an existing medication or inventory item,
+tracking its specific quantity and expiry date.
 
+**Command Word:** `batch`
+**Format:**
+```
+batch n/<name> q/<quantity> d/<expiryDate>
+```
+Finds the item by name in the inventory, organizes existing batches to flag expired ones, 
+generates a new batch with the specified quantity and expiry date, and appends it to the item's record.
+Finally, it updates the storage file and command history.
+
+**Behaviour:**
+1. Parses the user input using prepareBatch to extract the item name, quantity, and expiry date.
+2. Validates that all prefixes `(n/, q/, d/)` are present and in the correct sequential order.
+3. Ensures the quantity is a positive integer. and expiry date matches the `YYYY-MM-DD` format
+4. Instantiates a new `BatchCommand` with the extracted parameters
+5. Calls `BatchCommand.executre()`, which also checks if the item exists in the inventory.
+6. Calls `item.sortAndMarkExpiredBatches()` to organize the item's current stock
+7. Calculates the new batch number and instanties the `Batch` object 
+8. Calls `item.addBatch(newBatch)` to attach it to the inventory item
+9. Calls `ui.printBatch()` to display the success mesage and updated stock details
+10. Records the addition in the command history and saves the new batch to storage via `storage.savetoFile()`.
+
+**Failure cases & messages:**
+- If any prefix is missing: "Invalid batch format. Format: batch n/NAME q/QUANTITY d/EXPIRY_DATE(YYYY-MM-DD)"
+- If prefixes are out of order: "Ensure the arguments are in the correct order:"
+- If quantity is not a number or is empty: "Invalid Quantity. Please enter a positive whole number for the quantity"
+- If quantity is not a number or is empty: "Invalid quantity. Please enter a positive whole number for the quantity"
+- If expiry data format is incorrect: "Invalid expiry date. Please use a valid format (e.g., YYYY-MM-DD)."
 ### Feature: Withdraw Stock
 
 ![WithdrawCommand_SequenceDiagram](diagrams/WithdrawCommandSequenceDiagram.png)
