@@ -231,9 +231,11 @@ Saves the inventory and exits the application.
     ```
 
 ## Saving the Data
-MediStock stores its data automatically when you exit the application.
+* **Automatic  Saving:** Any changes made to the inventory (such as adding medications or batches) are
+immediately saved to your local storage after a command executes successfully.
+* **Command History:** Your command history is also tracked and saved automatically
 
-The following runtime files are created locally:
+The following runtime files are created locally for storage:
 - `data/Inventory.txt`
 - `data/History.txt`
 - `data/medistock.log`
@@ -246,10 +248,14 @@ If the file format is edited incorrectly, MediStock may fail to load the stored 
 ## FAQ
 
 **Q:** Where is my data saved?  
-**A:** MediStock saves its inventory, command history, and application logs in the `data/` folder, specifically in `data/Inventory.txt`, `data/History.txt`, and `data/medistock.log`.
+**A:** MediStock saves its inventory, command history, and application logs in the `data/` folder, specifically in 
+`data/Inventory.txt`, `data/History.txt`, and `data/medistock.log`.
 
 **Q:** What is a batch, and why do I need the `batch` command?  
-**A:** A batch is one stock entry of the same medication with its own quantity and expiry date. This is useful because you may receive the same medication multiple times with different expiry dates. For example, you can have two batches of `Paracetamol 500mg`, each with a different expiry date. MediStock keeps those batches separate and withdraws from the earliest-expiring batch first.
+**A:** A batch is one stock entry of the same medication with its own quantity and expiry date. This is useful because 
+you may receive the same medication multiple times with different expiry dates. For example, you can have two batches 
+of `Paracetamol 500mg`, each with a different expiry date. MediStock keeps those batches separate and withdraws from 
+the earliest-expiring batch first.
 
 **Q:** Where can I find the index of the medical item?  
 **A:** The index is the number shown beside the item in the output of the `list` command.
