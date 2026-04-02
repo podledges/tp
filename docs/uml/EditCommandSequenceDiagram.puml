@@ -1,0 +1,42 @@
+@startuml
+title EditCommand Sequence Diagram
+
+actor User
+participant ":Medistock" as App
+participant ":Ui" as Ui
+participant ":Parser" as Parser
+participant ":EditCommand" as EditCommand
+participant ":Inventory" as Inventory
+participant ":Storage" as Storage
+participant ":HistoryStorage" as HistoryStorage
+
+User -> App : run "edit o/... [n/...] [u/...] [min/...]"
+activate App
+
+App -> Ui : getInput()
+Ui --> App : input
+
+App -> Parser : parseCommand(input)
+activate Parser
+create EditCommand
+Parser -> EditCommand : new EditCommand(...)
+Parser --> App : editCommand
+deactivate Parser
+
+App -> EditCommand : execute(inventory, ui, storage, histories)
+activate EditCommand
+
+EditCommand -> Inventory : editItem(...)
+activate Inventory
+Inventory -> Inventory : create updated item\nand replace old entry
+Inventory --> EditCommand : updatedItem
+deactivate Inventory
+
+EditCommand -> Storage : saveToFile(inventory)
+EditCommand -> Ui : printEdit(...)
+EditCommand -> EditCommand : histories.add(...)
+deactivate EditCommand
+
+App -> HistoryStorage : save(histories)
+deactivate App
+@enduml
