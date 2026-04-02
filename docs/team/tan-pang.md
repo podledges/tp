@@ -35,4 +35,4 @@ medication and `history` displays the past changes of the MediStock inventory to
     - See [Developer Guide updates] (https://github.com/AY2526S2-CS2113-W10-2/tp/issues/60)
 
 - **Review/mentoring contributions:**
-    - To be filled with actual PR review links.
+    - To be filled with actual PR review links. 
