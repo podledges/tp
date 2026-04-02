@@ -64,16 +64,19 @@ create n/<name> u/<unit> min/<threshold>
 ```
 
 Creates a new `InventoryItem` using the specified name, unit, and minimum threshold, then adds it to the inventory for future batch tracking.
+The created item does not contain any batches yet; stock is added later through the `batch` command.
 
 **Behaviour:**
 1. Parses the user input to extract the item name, unit, and minimum threshold.
 2. Validates that `n/`, `u/`, and `min/` are present and that they appear in the correct order.
 3. Validates that name, unit, and minimum threshold are not empty.
 4. Parses the minimum threshold as a positive integer.
-5. Creates a new `InventoryItem` and calls `inventory.addItem(item)` to add it to the inventory.
-6. Calls `storage.saveToFile(item)` to persist the new item.
-7. Calls `ui.printCreate(name, unit, minimumThreshold)` to display the created item details.
-8. Records the creation in the command history.
+5. Creates a `CreateCommand` with the validated values.
+6. Creates a new `InventoryItem` with the specified metadata and no batches, then calls `inventory.addItem(item)` to add it to the inventory.
+7. `inventory.addItem(item)` checks that another item with the same normalized name does not already exist.
+8. Calls `storage.saveToFile(item)` to append the new item to storage.
+9. Calls `ui.printCreate(name, unit, minimumThreshold)` to display the created item details.
+10. Records the creation in the command history.
 
 **Failure cases & messages:**
 - If `n/`, `u/`, or `min/` is missing: "Invalid create format. Format: create n/NAME u/UNIT min/THRESHOLD"
