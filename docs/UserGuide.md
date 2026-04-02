@@ -70,6 +70,21 @@ Shows all active and expired inventory items, together with their batch informat
         Batch 1: 100 Capsules, Exp: 2024-01-15
     ____________________________________________________________
     ```
+
+### Viewing Command History: `history`
+Lists the history of changes in the inventory which includes `create`, `batch`, `withdraw` and `delete`.
+* **Format:** `history`
+* **Example Output:**
+
+    ```text
+    ____________________________________________________________
+    History of Stocks:
+    1. Created 'Vyvanse 70mg' of 'tablets' unit with minimum threshold of 10.
+    2. Added a batch of 200 tablets of Vyvanse 70mg with expiry date 2028-06-07.
+    3. Withdrawn 50 tablets of 'Vyvanse 70mg'.
+    4. Deleted 'Vyvanse 70mg'.
+    ____________________________________________________________
+    ```
     
 <div style="page-break-after: always;"></div>
 
@@ -91,16 +106,15 @@ Shows medications whose names contain the given keyword.
     ____________________________________________________________
     ```
 
-### Deleting a Medication: `delete`
-Deletes a medication either by name or by the index shown in the inventory list.
-
+### Deleting a Medication Class: `delete`
+Removes an entire Medication Class from the inventory permanently.
 * **Format:** `delete n/NAME` or `delete i/INDEX`
-* **Example:** `delete n/Paracetamol 500mg`
+* **Example:** `delete n/Paracetamol 500mg` or `delete i/2`
 * **Example Output:**
 
-    ```text
+    ```text 
     ____________________________________________________________
-    Product deleted:Paracetamol 500mg (Tablets)
+    Product deleted: Paracetamol 500mg (Tablets)
     ____________________________________________________________
     ```
 
@@ -145,23 +159,6 @@ Withdraws a quantity from an existing medication entry.
     ```text
     ____________________________________________________________
     Insufficient stock for Paracetamol 500mg. Available: 0, Requested: 50
-    ____________________________________________________________
-    ```
-
-### Viewing Command History: `history`
-Shows the previously recorded stock-related commands.
-
-* **Format:** `history`
-* **Example Output:**
-
-    ```text
-    ____________________________________________________________
-    History of Stocks:
-    1. Created 'Paracetamol 500mg' of 'Tablets' unit with minimum threshold of 250.
-    2. Added a batch of 200 Tablets of Paracetamol 500mg with expiry date 2028-06-07.
-    3. Created 'Vyvanse 70mg' of 'Tablets' unit with minimum threshold of 50.
-    4. Added a batch of 200 Tablets of Vyvanse 70mg with expiry date 2028-06-07.
-    5. Withdrawn 50 Tablets of 'Vyvanse 70mg'.
     ____________________________________________________________
     ```
 

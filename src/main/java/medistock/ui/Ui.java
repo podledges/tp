@@ -211,7 +211,7 @@ public class Ui {
 
     public void printDelete(InventoryItem deletedItem) {
         printLine();
-        System.out.printf("Product deleted:" + deletedItem.getName() + " (" + deletedItem.getUnit() + ")\n");
+        System.out.printf("Product deleted: " + deletedItem.getName() + " (" + deletedItem.getUnit() + ")\n");
         printLine();
     }
 
