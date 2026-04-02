@@ -57,7 +57,7 @@ Shows all active and expired inventory items, together with their batch informat
         Batch 1: 300 Tablets, Exp: 2030-09-30
         Total: 300 Tablets
         Status: Healthy
-    
+
     2. Vyvanse 70mg (Min: 50)
         Batch 1: 60 Tablets, Exp: 2028-06-07
         Total: 60 Tablets
@@ -74,8 +74,6 @@ Shows medications whose names contain the given keyword.
 
 * **Format:** `find KEYWORD`
 * **Example:** `find Paracetamol`
-  * **Example Output:**
-
 * **Example Output:**
 
     ```text
@@ -93,7 +91,7 @@ Shows medications whose names contain the given keyword.
 Deletes a medication either by name or by the index shown in the inventory list.
 
 * **Format:** `delete n/NAME` or `delete i/INDEX`
-* **Example:** `delete n/Paracetamol 500mg` or `delete i/1`
+* **Example:** `delete n/Paracetamol 500mg`
 * **Example Output:**
 
     ```text
@@ -127,12 +125,22 @@ Withdraws a quantity from an existing medication entry.
 
 * **Format:** `withdraw n/NAME q/QUANTITY`
 * **Example:** `withdraw n/Paracetamol 500mg q/50`
+* If a medication has multiple batches, MediStock withdraws stock from the earliest-expiring batch first.
+* Withdrawing an expired item is not possible. To remove expired stock, use `remove-expired`.
 * **Example Output:**
 
     ```text
     Withdrawn 50 Paracetamol 500mg from inventory.
     ____________________________________________________________
     Stock of Paracetamol 500mg is now: 150 Tablets
+    ____________________________________________________________
+    ```
+
+* **Example Output (insufficient stock):**
+
+    ```text
+    ____________________________________________________________
+    Insufficient stock for Paracetamol 500mg. Available: 0, Requested: 50
     ____________________________________________________________
     ```
 
@@ -217,11 +225,13 @@ If the file format is edited incorrectly, MediStock may fail to load the stored 
 ## FAQ
 
 **Q:** Where is my data saved?  
-**A:** MediStock saves its inventory, command history, and application logs in the data/ folder,
-specifically in data/Inventory.txt, data/History.txt, and data/medistock.log
+**A:** MediStock saves its inventory, command history, and application logs in the `data/` folder, specifically in `data/Inventory.txt`, `data/History.txt`, and `data/medistock.log`.
 
-**Q:** Where can I find the index of the medical item?
-**A:** The index is the number shown beside the item in the output of the command 'list'.
+**Q:** What is a batch, and why do I need the `batch` command?  
+**A:** A batch is one stock entry of the same medication with its own quantity and expiry date. This is useful because you may receive the same medication multiple times with different expiry dates. For example, you can have two batches of `Paracetamol 500mg`, each with a different expiry date. MediStock keeps those batches separate and withdraws from the earliest-expiring batch first.
+
+**Q:** Where can I find the index of the medical item?  
+**A:** The index is the number shown beside the item in the output of the `list` command.
 
 ## Known Issues
 - NIL
