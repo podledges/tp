@@ -22,19 +22,23 @@ Creates a new medication entry so its stock can be tracked.
 * **Format:** `create n/NAME u/UNIT min/THRESHOLD`
 * **Example:** `create n/Paracetamol 500mg u/Tablets min/250`
 * **Example Output:**
+
     ```text
     ____________________________________________________________
     Product created:Paracetamol 500mg (Tablets)
     Minimum threshold: 250
     ____________________________________________________________
     ```
+    
 <div style="page-break-after: always;"></div>
+
 ### Editing a Medication: `edit`
 Edits an existing medication entry. You can update its name, unit, minimum threshold, or any combination of these.
 
 * **Format:** `edit o/OLD_NAME [n/NEW_NAME] [u/NEW_UNIT] [min/NEW_THRESHOLD]`
 * **Example:** `edit o/Paracetamol 500mg n/Paracetamol 650mg`
 * **Example Output:**
+
     ```text
     ____________________________________________________________
     Product updated: Paracetamol 500mg -> Paracetamol 650mg (Tablets)
@@ -47,6 +51,7 @@ Shows all active and expired inventory items, together with their batch informat
 
 * **Format:** `list`
 * **Example Output:**
+
     ```text
     ____________________________________________________________
     Current Active Pharmaceutical Inventory:
@@ -67,12 +72,14 @@ Shows all active and expired inventory items, together with their batch informat
     ```
     
 <div style="page-break-after: always;"></div>
+
 ### Finding a Medication: `find`
 Shows medications whose names contain the given keyword.
 
 * **Format:** `find KEYWORD`
 * **Example:** `find Paracetamol`
 * **Example Output:**
+
     ```text
     ____________________________________________________________
     Here are the matching items in your inventory:
@@ -90,6 +97,7 @@ Deletes a medication either by name or by the index shown in the inventory list.
 * **Format:** `delete n/NAME` or `delete i/INDEX`
 * **Example:** `delete n/Paracetamol 500mg`
 * **Example Output:**
+
     ```text
     ____________________________________________________________
     Product deleted:Paracetamol 500mg (Tablets)
@@ -102,6 +110,7 @@ Adds a batch to an existing medication entry.
 * **Format:** `batch n/NAME q/QUANTITY d/EXPIRY_DATE`
 * **Example:** `batch n/Paracetamol 500mg q/200 d/2028-06-07`
 * **Example Output:**
+
     ```text
     Batch of 200 Paracetamol 500mg, expiring on 2028-06-07
      has been successfully to the inventory!
@@ -114,8 +123,7 @@ Adds a batch to an existing medication entry.
         Status: Critical
     ____________________________________________________________
     ```
-    
-    <div style="page-break-after: always;"></div>
+
 ### Withdrawing Medication: `withdraw`
 Withdraws a quantity from an existing medication entry.
 
@@ -124,6 +132,7 @@ Withdraws a quantity from an existing medication entry.
 * If a medication has multiple batches, MediStock withdraws stock from the earliest-expiring batch first.
 * Withdrawing an expired item is not possible. To remove expired stock, use `remove-expired`.
 * **Example Output:**
+
     ```text
     Withdrawn 50 Paracetamol 500mg from inventory.
     ____________________________________________________________
@@ -132,6 +141,7 @@ Withdraws a quantity from an existing medication entry.
     ```
 
 * **Example Output (insufficient stock):**
+
     ```text
     ____________________________________________________________
     Insufficient stock for Paracetamol 500mg. Available: 0, Requested: 50
@@ -143,6 +153,7 @@ Shows the previously recorded stock-related commands.
 
 * **Format:** `history`
 * **Example Output:**
+
     ```text
     ____________________________________________________________
     History of Stocks:
@@ -153,14 +164,14 @@ Shows the previously recorded stock-related commands.
     5. Withdrawn 50 Tablets of 'Vyvanse 70mg'.
     ____________________________________________________________
     ```
-    
-<div style="page-break-after: always;"></div>
+
 ### Removing Expired Batches: `remove-expired`
 Removes expired batches from all items or from a specific medication.
 
 * **Format:** `remove-expired` or `remove-expired n/NAME`
 * **Example (all items):** `remove-expired`
 * **Example Output:**
+
     ```text
     ____________________________________________________________
     Removed 3 expired batch(es) from all items.
@@ -169,6 +180,7 @@ Removes expired batches from all items or from a specific medication.
 
 * **Example (specific item):** `remove-expired n/Paracetamol 500mg`
 * **Example Output:**
+
     ```text
     ____________________________________________________________
     Removed 1 expired batch(es) from Paracetamol 500mg.
@@ -176,6 +188,7 @@ Removes expired batches from all items or from a specific medication.
     ```
 
 * If no expired batches are found for the specified medication:
+
     ```text
     ____________________________________________________________
     No expired batches found for Paracetamol 500mg.
@@ -187,6 +200,7 @@ Shows the built-in list of available commands.
 
 * **Format:** `help`
 * **Example Output:**
+
     ```text
     ____________________________________________________________
     Available commands:
@@ -202,8 +216,7 @@ Shows the built-in list of available commands.
     10. exit
     ____________________________________________________________
     ```
-    
-<div style="page-break-after: always;"></div>
+
 ### Exiting the Program: `exit`, `quit`
 Saves the inventory and exits the application.
 
@@ -243,7 +256,6 @@ If the file format is edited incorrectly, MediStock may fail to load the stored 
 
 ## Known Issues
 - NIL
-
 <div style="page-break-after: always;"></div>
 ### Command Summary
 The following table summarizes the available commands:
