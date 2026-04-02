@@ -1,0 +1,48 @@
+@startuml
+title MediStock Architecture
+left to right direction
+
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+
+actor User
+
+rectangle "MediStock System" {
+  package "Interface" {
+    component Ui
+  }
+
+  package "Logic" {
+    component "MediStock\n(Main)" as Main
+    component Parser
+    component Command
+  }
+
+  package "Model" {
+    component "Inventory"
+  }
+
+  package "storage" {
+    component Storage
+    component HistoryStorage
+  }
+}
+
+file "data/Inventory.txt" as InventoryFile
+file "data/History.txt" as HistoryFile
+
+User --> Ui
+Ui --> Main
+Main --> Parser
+Parser --> Command
+Command --> "Inventory"
+Command --> Ui
+
+Main --> Storage
+Main --> HistoryStorage
+
+Storage --> InventoryFile
+HistoryStorage --> HistoryFile
+
+@enduml

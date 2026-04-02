@@ -3,12 +3,6 @@
 ## Table of Contents
 - [Acknowledgements](#acknowledgements)
 - [Design](#design)
-    - [Architecture](#architecture)
-    - [UI Component](#ui-component)
-    - [Parser Component](#parser-component)
-    - [Command Component](#command-component)
-    - [Inventory Component](#inventory-component)
-    - [Storage Component](#storage-component)
 - [Implementation](#implementation)
     - [Feature: Create Item](#feature-create-item)
     - [Feature: Edit Item](#feature-edit-item)
@@ -37,7 +31,20 @@ This developer guide was inspired by
 
 ## Design
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+The Architecture Diagram below shows the high-level design of Medistock.
+![MedistockArchitectureDiagram](diagrams/MedistockArchitectureDiagram.png)
+
+How the architecture components interact:
+
+The sequence of interactions for a typical command, such as `withdraw n/paracetamol q/5`, is:
+
+1. `MediStock` reads the user input from the command line.
+2. `MediStock` passes the raw input to the `Parser` for interpretation.
+3. The `Parser` validates the format and returns the appropriate `Command` object.
+4. `MediStock` executes the `Command`.
+5. The `Command` interacts with `Inventory` to read or modify the in-memory data.
+6. The `Command` uses `Ui` to display the success message, error message, or requested output.
+7. If the command changes the inventory, `Storage` saves the updated data to file.
 
 ## Implementation
 
@@ -403,7 +410,7 @@ Displays a farewell message and terminates the application.
 - Pharmacists and pharmacy technicians managing medicine inventory in small to mid-sized clinics or pharmacies.
 - Users who prefer a CLI over a GUI for faster data entry during busy periods.
 - Users who need to track batch-level details such as expiry dates and quantities.
-- Users comfortable with typing commands and who value speed over visual interfaces.
+- Users comfortable in typing commands and who value speed over visual interfaces.
 - Users who need to ensure compliance with expiry regulations and avoid dispensing expired medicine.
 
 ### Value proposition
@@ -415,18 +422,40 @@ simplifies stock-taking, and helps maintain minimum stock thresholds so that cri
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...                | I want to ...                                                        | So that I can ...                                                      |
+|---------|-------------------------|----------------------------------------------------------------------|------------------------------------------------------------------------|
+| v1.0    | new user                | view a list of supported commands                                    | refer to the correct command formats when learning the application     |
+| v1.0    | clinic staff member     | create a new medicine item with its unit and minimum stock threshold | start tracking a medicine in the inventory                             |
+| v1.0    | clinic staff member     | add a batch with quantity and expiry date to an existing medicine    | record newly received stock accurately                                 |
+| v1.0    | clinic staff member     | list all medicines and their batches                                 | review the current inventory quickly                                   |
+| v1.0    | clinic staff member     | delete an item by name or index                                      | remove medicines that should no longer be tracked                      |
+| v1.0    | clinic staff member     | exit the application safely                                          | close the program after my work is done                                |
+| v2.0    | clinic staff member     | withdraw stock from a medicine item                                  | record medicine dispensed to patients and keep stock levels up to date |
+| v2.0    | clinic staff member     | have stock deducted from the earliest-expiring valid batch first     | reduce wastage and follow expiry-aware stock handling                  |
+| v2.0    | clinic staff member     | find medicine items by partial name match                            | locate medicines quickly without scanning the full inventory           |
+| v2.0    | clinic staff member     | be warned about expired batches during normal operations             | avoid dispensing expired medicine                                      |
+| v2.0    | clinic staff member     | remove expired batches from one medicine or the whole inventory      | keep the inventory clean and compliant                                 |
+| v2.0    | clinic staff member     | see low-stock warnings for medicines below their threshold           | restock important medicines before they run out                        |
+| v2.0    | returning user          | have inventory data saved and loaded automatically                   | continue from previous sessions without re-entering data               |
+| v2.0    | user who makes mistakes | receive clear error messages for invalid command formats             | correct my input quickly and continue using the application            |
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. MediStock should run as a local desktop application on mainstream operating systems that support Java 17 or above.
+2. The application should be optimized for users who prefer a Command Line Interface for fast routine inventory operations.
+3. The system should persist inventory and command history data locally across sessions.
+4. The application should handle invalid user input gracefully by showing clear error messages instead of crashing.
+5. Typical commands should complete within a few seconds for small to medium-sized clinic or pharmacy inventories.
+6. The codebase should remain modular and maintainable so that future developers can extend the system easily.
+
 
 ## Glossary
 
-* *glossary item* - Definition
+* *Batch* - A specific stock entry for a medicine item, with its own batch number, quantity, and expiry date.
+* *Inventory item* - A medicine tracked by MediStock, identified by its name and associated with one or more batches.
+* *Minimum threshold* - The minimum quantity set for an inventory item, used to determine whether the item should be flagged as low stock.
+* *Expired batch* - A batch whose expiry date is earlier than the current date and should no longer be dispensed.
+* *Active batch* - A batch that has not expired and can still contribute to the available stock of an inventory item.
 
 ## Instructions for manual testing
 
