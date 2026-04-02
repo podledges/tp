@@ -17,3 +17,9 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 summary.md
 currPlan.md
+
+# Local runtime data
+/data/Inventory.txt
+/data/History.txt
+/data/medistock.log
+/data/medistock.log.lck

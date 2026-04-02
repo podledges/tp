@@ -18,21 +18,18 @@ import java.util.ArrayList;
  * Main class for the MediStock application.
  * Manages the initialization and execution of the inventory management system.
  */
-public class Medistock {        // I think we need to change name of class and file to MediStock
-
+public class Medistock {
     private Inventory inventory;
     private Ui ui;
     private Storage storage;
     private final HistoryStorage historyStorage;
     private List<String> histories;
 
-
     public Medistock(Path filepath, String historyFilepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath);
         this.historyStorage = new HistoryStorage(historyFilepath);
         this.inventory = new Inventory();
-
 
         try {
             histories = historyStorage.load(new ArrayList<>());
@@ -69,13 +66,12 @@ public class Medistock {        // I think we need to change name of class and f
             }
         }
         exit();
-
     }
 
     /**
      * Terminates the application safely. Forces the Java Virtual Machine to shut down.
      */
-    private void exit(){
+    private void exit() {
         System.exit(0);
     }
 
@@ -89,4 +85,3 @@ public class Medistock {        // I think we need to change name of class and f
         mediStock.boot();
     }
 }
-

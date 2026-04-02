@@ -65,4 +65,20 @@ public class InventoryItemTest {
         assertEquals(5, item.getQuantity());
         assertEquals(1, item.getBatchQuantity());
     }
+
+    @Test
+    void withdraw_allStockExpired_doesNotWithdrawFromExpiredBatch() {
+        InventoryItem item = new InventoryItem("Paracetamol 500mg", "Tablets", 10);
+        item.addBatch(new Batch(1, 10, LocalDate.now().minusDays(1)));
+
+        MediStockException exception = assertThrows(MediStockException.class,
+                () -> item.withdraw(5));
+
+        assertEquals("Insufficient stock for Paracetamol 500mg. Available: 0, Requested: 5",
+                exception.getMessage());
+        assertEquals(0, item.getQuantity());
+        assertEquals(0, item.getBatchQuantity());
+        assertEquals(1, item.getTotalBatchQuantity());
+        assertEquals(1, item.getExpiredBatches().size());
+    }
 }

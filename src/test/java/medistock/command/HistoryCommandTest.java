@@ -69,7 +69,7 @@ class HistoryCommandTest {
         Storage storage = new Storage(Path.of("./data/Inventory.txt"));
         UiStub uiStub = new UiStub();
 
-        command.execute(inventory, uiStub,storage, histories);
+        command.execute(inventory, uiStub, storage, histories);
 
         assertTrue(uiStub.showHistoryCalled);
         assertSame(histories, uiStub.receivedHistories);

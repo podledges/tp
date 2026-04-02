@@ -73,8 +73,7 @@ public class Storage {
                 } catch (MediStockException e) {
                     throw new MediStockException("Corrupted save file! Duplicate item found: " + currentItemName);
                 }
-            }
-            else {
+            } else {
                 if (currentItemName.isEmpty()) {
                     throw new MediStockException("Corrupted save file! Found a batch before any item was declared: "
                                     + line);

@@ -94,6 +94,7 @@ public class InventoryItem implements Storable {
         }
         return earliestDate;
     }
+
     /**
      * Returns the total quantity of this item across all batches.
      *
@@ -109,7 +110,7 @@ public class InventoryItem implements Storable {
         return totalQuantity;
     }
 
-    public String  getStockStatus() {
+    public String getStockStatus() {
         int quantity = getQuantity();
         if (isLowStock()) {
             return "Critical";
@@ -244,4 +245,3 @@ public class InventoryItem implements Storable {
         return active;
     }
 }
-

@@ -30,11 +30,11 @@ public class Parser {
             return prepareCreate(text);
         } else if (text.startsWith("edit ")) {
             return prepareEdit(text);
-        } else if (text.startsWith("batch")) {
+        } else if (text.startsWith("batch ")) {
             return prepareBatch(text);
-        } else if (text.startsWith("withdraw")) {
+        } else if (text.startsWith("withdraw ")) {
             return prepareWithdraw(text);
-        } else if (text.startsWith("delete")) {
+        } else if (text.startsWith("delete ")) {
             return prepareDelete(text);
         } else if (text.equals("list")) {
             return new ListCommand();

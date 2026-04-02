@@ -56,15 +56,6 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    /**
-     * Reads a command from the user.
-     *
-     * @return The user's input as a trimmed string.
-     */
-    public String readCommand() {
-        return scanner.nextLine().trim();
-    }
-
     public static void printLine() {
         System.out.println("____________________________________________________________");
     }
@@ -85,10 +76,6 @@ public class Ui {
         printLine();
         System.out.println(e);
         printLine();
-    }
-
-    public void printEarliestExpiry(InventoryItem item) {
-
     }
 
     public void printExitMessage() {
@@ -176,7 +163,7 @@ public class Ui {
             printLine();
             System.out.println("History of Stocks:");
             for (java.lang.String commandText : histories) {
-                System.out.println(itemIndex + ". " + commandText);;
+                System.out.println(itemIndex + ". " + commandText);
                 itemIndex++;
             }
             printLine();
@@ -372,7 +359,9 @@ public class Ui {
         System.out.println("5. batch " + BATCH_FORMAT);
         System.out.println("6. withdraw " + WITHDRAW_FORMAT);
         System.out.println("7. find " + FIND_FORMAT);
-        System.out.println("8. exit");
+        System.out.println("8. remove-expired " + REMOVE_EXPIRED_FORMAT);
+        System.out.println("9. history");
+        System.out.println("10. exit");
         printLine();
     }
 }

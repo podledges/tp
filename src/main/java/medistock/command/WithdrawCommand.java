@@ -23,13 +23,12 @@ public class WithdrawCommand extends Command {
 
     @Override
     public void execute(Inventory inventory, Ui ui, Storage storage,  List<String> histories)
-                    throws MediStockException, IOException {
+            throws MediStockException, IOException {
         InventoryItem item = inventory.getItem(name);
         item.withdraw(quantity);
         ui.printWithdraw(quantity, item);
         histories.add(toHistoryString(item.getUnit()));
         storage.saveToFile(inventory);
-
     }
 
     public String toHistoryString(String unit) {
