@@ -435,7 +435,7 @@ Displays a farewell message and terminates the application.
 
 
 ### Feature: Data Storage
-![Storage_ClassDiagram](diagrams/Storage_ClassDiagram.png) <br> <br>
+![Storage_ClassDiagram.png](diagrams/Storage_ClassDiagram.png) <br> <br>
 **Purpose:** Responsible for persisting the state of the `Inventory` to a local text file, and loading it back into memory upon
 application startup <br>
 
