@@ -119,4 +119,31 @@ class InventoryTest {
         assertEquals(1, result.size());
         assertEquals(item, result.get(0));
     }
+
+    @Test
+    void find_partialKeyword_returnsMatchingItems() throws MediStockException {
+        Inventory inventory = new Inventory();
+
+        InventoryItem paracetamol = new InventoryItem("Paracetamol 500mg", "Tablet", 200);
+        InventoryItem vyvanse = new InventoryItem("Vyvanse 70mg", "Tablet", 50);
+        inventory.addItem(paracetamol);
+        inventory.addItem(vyvanse);
+
+        List<InventoryItem> result = inventory.findItem("ceta");
+
+        assertEquals(1, result.size());
+        assertEquals(paracetamol, result.get(0));
+    }
+
+    @Test
+    void delete_invalidIndex_throwsException() throws MediStockException {
+        Inventory inventory = new Inventory();
+        inventory.addItem(new InventoryItem("Paracetamol 500mg", "Tablet", 200));
+
+        MediStockException exception = assertThrows(MediStockException.class,
+                () -> inventory.deleteItem(2));
+
+        assertEquals("Index entered out of bounds! Valid indices: 1 to 1",
+                exception.getMessage());
+    }
 }
