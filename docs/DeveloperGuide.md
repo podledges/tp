@@ -96,8 +96,9 @@ Finds the specified item using its current name, applies the requested updates, 
 - WARNING when attempting to get a non-existent item.
 - FINE on successful item retrieval.
 
-### Feature: Add Batch
-![BatchCommand_SequenceDiagram](diagrams/BatchCommand_SequenceDiagram.jpg)
+### Feature: Add Batch!
+![BatchCommand_ClassDiagram.png](diagrams/BatchCommand_ClassDiagram.png)
+![BatchCommand_SequenceDiagram_new.png](diagrams/BatchCommand_SequenceDiagram_new.png)
 **Purpose:** Add a new batch of stock to an existing medication or inventory item,
 tracking its specific quantity and expiry date.
 
@@ -435,7 +436,9 @@ Displays a farewell message and terminates the application.
 
 
 ### Feature: Data Storage
-![Storage_ClassDiagram](diagrams/Storage_ClassDiagram.png) <br> <br>
+![Storage_ClassDiagram_new.png](diagrams/Storage_ClassDiagram_new.png)
+![Storage_init_SequenceDiagram.png](diagrams/Storage_init_SequenceDiagram.png)
+![Storage_saving_SequenceDiagram.png](diagrams/Storage_saving_SequenceDiagram.png) <br><br>
 **Purpose:** Responsible for persisting the state of the `Inventory` to a local text file, and loading it back into memory upon
 application startup <br>
 
