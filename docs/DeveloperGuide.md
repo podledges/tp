@@ -56,6 +56,8 @@ The sequence of interactions for a typical command, such as `withdraw n/paraceta
 
 ### Feature: Create Item
 
+![CreateCommand_ClassDiagram](diagrams/CreateCommandClassDiagram.png)
+
 ![CreateCommand_SequenceDiagram](diagrams/CreateCommandSequenceDiagram.png)
 
 **Purpose:** Create a new item in the inventory with its name, unit, and minimum threshold.

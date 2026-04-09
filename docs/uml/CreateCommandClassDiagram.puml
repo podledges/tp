@@ -1,0 +1,28 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+title Create Item Class Diagram
+
+class Parser
+
+abstract class Command
+
+class CreateCommand
+
+class Inventory
+
+class InventoryItem
+
+class Storage
+
+CreateCommand -|> Command
+
+Parser ..> CreateCommand : creates >
+CreateCommand ..> Inventory : uses >
+CreateCommand ..> Storage : uses >
+CreateCommand ..> InventoryItem : creates >
+
+Inventory "1" *-- "*" InventoryItem : contains >
+
+@enduml
