@@ -17,7 +17,6 @@ public class InventoryItem implements Storable {
     private final String name;
     private final String unit;
     private final int minimumThreshold;
-    private int batchQuantity;
     private final List<Batch> batches;
 
     /**
@@ -35,7 +34,6 @@ public class InventoryItem implements Storable {
         this.name = name;
         this.unit = unit;
         this.minimumThreshold = minimumThreshold;
-        this.batchQuantity = 0;
         this.batches = new ArrayList<>();
     }
 
