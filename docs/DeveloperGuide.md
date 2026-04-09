@@ -210,6 +210,7 @@ Finds the item by name, sorts its batches by expiry date (earliest first), marks
 
 ### Feature: Delete Item by Name
 
+![DeleteCommandName_ClassDiagram](diagrams/DeleteCommandName_ClassDiagram.png)
 ![DeleteCommandName_SequenceDiagram](diagrams/DeleteCommandName_SequenceDiagram.png)
 
 **Purpose:** Delete an entire type of item from the inventory using the item's name.
@@ -241,6 +242,7 @@ If the name of the item does not match any of the items in the inventory, prints
 
 ### Feature: Delete Item by Index
 
+![DeleteCommandIndex_ClassDiagram](diagrams/DeleteCommandIndex_ClassDiagram.png)
 ![DeleteCommandIndex_SequenceDiagram](diagrams/DeleteCommandIndex_SequenceDiagram.png)
 
 **Purpose:** Delete an entire type of item from the inventory using the item's index in the inventory.
