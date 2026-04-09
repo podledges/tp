@@ -14,7 +14,9 @@ User -> App : run "edit o/... [n/...] [u/...] [min/...]"
 activate App
 
 App -> Ui : getInput()
+activate Ui
 Ui --> App : input
+deactivate Ui
 
 App -> Parser : parseCommand(input)
 activate Parser
@@ -33,10 +35,22 @@ Inventory --> EditCommand : updatedItem
 deactivate Inventory
 
 EditCommand -> Storage : saveToFile(inventory)
+activate Storage
+Storage --> EditCommand
+deactivate Storage
+
 EditCommand -> Ui : printEdit(...)
+activate Ui
+Ui --> EditCommand
+deactivate Ui
+
 EditCommand -> EditCommand : histories.add(...)
+EditCommand --> App
 deactivate EditCommand
 
 App -> HistoryStorage : save(histories)
+activate HistoryStorage
+HistoryStorage --> App
+deactivate HistoryStorage
 deactivate App
 @enduml

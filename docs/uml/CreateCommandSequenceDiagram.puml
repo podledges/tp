@@ -1,0 +1,57 @@
+@startuml
+title CreateCommand Sequence Diagram
+
+actor User
+participant ":Medistock" as App
+participant ":Ui" as Ui
+participant ":Parser" as Parser
+participant ":CreateCommand" as CreateCommand
+participant ":Inventory" as Inventory
+participant ":Storage" as Storage
+participant ":HistoryStorage" as HistoryStorage
+
+User -> App : run "create n/... u/... min/..."
+activate App
+
+App -> Ui : getInput()
+activate Ui
+Ui --> App : input
+deactivate Ui
+
+App -> Parser : parseCommand(input)
+activate Parser
+create CreateCommand
+Parser -> CreateCommand : new CreateCommand(...)
+Parser --> App : createCommand
+deactivate Parser
+
+App -> CreateCommand : execute(inventory, ui, storage, histories)
+activate CreateCommand
+
+CreateCommand -> CreateCommand : create InventoryItem(...)
+CreateCommand -> Inventory : addItem(item)
+activate Inventory
+Inventory -> Inventory : check duplicate name\nand add item
+Inventory --> CreateCommand
+deactivate Inventory
+
+CreateCommand -> Storage : saveToFile(item)
+activate Storage
+Storage --> CreateCommand
+deactivate Storage
+
+CreateCommand -> Ui : printCreate(...)
+activate Ui
+Ui --> CreateCommand
+deactivate Ui
+
+CreateCommand -> CreateCommand : histories.add(...)
+CreateCommand --> App
+deactivate CreateCommand
+
+App -> HistoryStorage : save(histories)
+activate HistoryStorage
+HistoryStorage --> App
+deactivate HistoryStorage
+deactivate App
+@enduml

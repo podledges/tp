@@ -56,7 +56,7 @@ The sequence of interactions for a typical command, such as `withdraw n/paraceta
 
 ### Feature: Create Item
 
-{UML diagrams to be implemented}
+![CreateCommand_SequenceDiagram](diagrams/CreateCommandSequenceDiagram.png)
 
 **Purpose:** Create a new item in the inventory with its name, unit, and minimum threshold.
 
@@ -555,7 +555,39 @@ simplifies stock-taking, and helps maintain minimum stock thresholds so that cri
 * *Command history* - The locally stored record of commands executed by the user, used to review past actions across sessions.
 
 
-## Instructions for manual testing
+## Appendix E: Instructions for Manual Testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-{To be implemented}
+The steps below assume the jar file is named `medistock.jar` and is run from its containing folder.
+
+### Launching the application
+
+1. Ensure that Java 17 or above is installed.
+2. Open a terminal in the folder containing `medistock.jar`.
+3. Run `java -jar medistock.jar`.
+
+### Starting from a clean state
+
+1. Exit the application if it is running.
+2. Delete `data/Inventory.txt` and `data/History.txt` in the same folder as the jar.
+3. Launch the jar again. MediStock will recreate the missing data files.
+
+### Suggested manual tests
+
+1. Create a new item:
+   - Command: `create n/Paracetamol 500mg u/Tablets min/250`
+   - Expected: a success message is shown, and `list` displays the new item with no batches yet.
+2. Reject a duplicate create:
+   - Command: `create n/Paracetamol 500mg u/Tablets min/250`
+   - Expected: an error message is shown for the duplicate item.
+3. Edit an existing item:
+   - Command: `edit o/Paracetamol 500mg n/Paracetamol 650mg u/Tablets min/300`
+   - Expected: a success message is shown, and `list` displays the updated item details.
+4. Add stock and verify listing:
+   - Commands: `batch n/Paracetamol 650mg q/400 d/2027-12-31` followed by `list`
+   - Expected: the item shows one batch with quantity `400`.
+5. Withdraw stock:
+   - Command: `withdraw n/Paracetamol 650mg q/50`
+   - Expected: the displayed quantity decreases accordingly.
+6. Check command history:
+   - Command: `history`
+   - Expected: the earlier `create`, `edit`, `batch`, and `withdraw` actions appear in order.
