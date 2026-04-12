@@ -383,10 +383,6 @@ public class Parser {
             throw new MediStockException("Index must be a valid number.");
         }
 
-        if (index <= 0) {
-            throw new MediStockException("Invalid index! Please enter a valid index.");
-        }
-
         return new DeleteCommandIndex(index);
     }
 

@@ -142,6 +142,9 @@ public class Inventory {
      * @throws MediStockException If the item does not exist.
      */
     public InventoryItem deleteItem(String name) throws MediStockException {
+        if (items.isEmpty()) {
+            throw new MediStockException("Unable to delete as inventory is empty!");
+        }
         String key = normalizeName(name);
         if (!items.containsKey(key)) {
             logger.log(Level.WARNING, "Attempted to delete non-existent item: " + name);
@@ -161,6 +164,9 @@ public class Inventory {
      * @throws MediStockException If the index is out of bounds.
      */
     public InventoryItem deleteItem(int index) throws MediStockException {
+        if (items.isEmpty()) {
+            throw new MediStockException("Unable to delete as inventory is empty!");
+        }
         if (index <= 0 || index > items.size()) {
             throw new MediStockException("Index entered out of bounds! Valid indices: 1 to " + items.size());
         }

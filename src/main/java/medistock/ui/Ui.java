@@ -195,7 +195,7 @@ public class Ui {
             int itemIndex = 1;
             printLine();
             System.out.println("History of Stocks:");
-            for (java.lang.String commandText : histories) {
+            for (String commandText : histories) {
                 System.out.println(itemIndex + ". " + commandText);
                 itemIndex++;
             }
