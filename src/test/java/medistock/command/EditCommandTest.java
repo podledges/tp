@@ -36,7 +36,7 @@ public class EditCommandTest {
         inventory.addItem(item);
 
         EditCommand command = new EditCommand("Aspirin", null, "Capsules", null);
-        command.execute(inventory, ui, storage, histories);
+        command.execute(inventory, ui, histories);
 
         InventoryItem updatedItem = inventory.getItem("Aspirin");
         assertEquals("Capsules", updatedItem.getUnit());
@@ -54,7 +54,7 @@ public class EditCommandTest {
         inventory.addItem(item);
 
         EditCommand command = new EditCommand("Aspirin", null, null, 20);
-        command.execute(inventory, ui, storage, histories);
+        command.execute(inventory, ui, histories);
 
         InventoryItem updatedItem = inventory.getItem("Aspirin");
         assertEquals("Tablets", updatedItem.getUnit());
@@ -72,7 +72,7 @@ public class EditCommandTest {
         inventory.addItem(item);
 
         EditCommand command = new EditCommand("Aspirin", "Aspirin 500mg", null, null);
-        command.execute(inventory, ui, storage, histories);
+        command.execute(inventory, ui, histories);
 
         assertFalse(inventory.hasItem("Aspirin"));
         assertTrue(inventory.hasItem("Aspirin 500mg"));
@@ -91,7 +91,7 @@ public class EditCommandTest {
         inventory.addItem(item);
 
         EditCommand command = new EditCommand("Aspirin", "Aspirin 500mg", null, null);
-        command.execute(inventory, ui, storage, histories);
+        command.execute(inventory, ui, histories);
 
         InventoryItem updatedItem = inventory.getItem("Aspirin 500mg");
         assertEquals(20, updatedItem.getQuantity());
@@ -114,7 +114,7 @@ public class EditCommandTest {
         EditCommand command = new EditCommand("Aspirin", "Panadol", null, null);
 
         assertThrows(MediStockException.class,
-                () -> command.execute(inventory, ui, storage, histories));
+                () -> command.execute(inventory, ui, histories));
         assertTrue(inventory.hasItem("Aspirin"));
         assertTrue(inventory.hasItem("Panadol"));
         assertEquals(0, histories.size());
@@ -131,7 +131,7 @@ public class EditCommandTest {
         inventory.addItem(item);
 
         EditCommand command = new EditCommand("Aspirin", "  ASPIRIN  ", null, null);
-        command.execute(inventory, ui, storage, histories);
+        command.execute(inventory, ui, histories);
 
         InventoryItem updatedItem = inventory.getItem("aspirin");
         assertEquals("  ASPIRIN  ", updatedItem.getName());

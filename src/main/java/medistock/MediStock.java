@@ -52,7 +52,7 @@ public class MediStock {
             try {
                 String input = ui.getInput();
                 Command command = Parser.parseCommand(input);
-                command.execute(inventory, ui, storage, histories);
+                command.execute(inventory, ui, histories);
                 if (command.isExit()) {
                     isRunning = false;
                 }
@@ -60,9 +60,10 @@ public class MediStock {
                 ui.printError(e.getMessage());
             }
             try {
+                storage.saveToFile(inventory);
                 historyStorage.save(histories);
             } catch (IOException e) {
-                System.out.println("Error saving history.");
+                System.out.println("Error saving data.");
             }
         }
         exit();

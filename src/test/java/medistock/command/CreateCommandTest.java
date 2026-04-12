@@ -31,7 +31,7 @@ public class CreateCommandTest {
         List<String> histories = new ArrayList<>();
         CreateCommand command = new CreateCommand("Aspirin", "Tablets", 10);
 
-        assertDoesNotThrow(() -> command.execute(inventory, ui, storage, histories));
+        assertDoesNotThrow(() -> command.execute(inventory, ui, histories));
 
         assertEquals(1, inventory.getSize());
         assertTrue(inventory.hasItem("Aspirin"));
@@ -45,7 +45,7 @@ public class CreateCommandTest {
         List<String> histories = new ArrayList<>();
         CreateCommand command = new CreateCommand("Aspirin", "Tablets", 10);
 
-        command.execute(inventory, ui, storage, histories);
+        command.execute(inventory, ui, histories);
 
         assertEquals(1, histories.size());
         assertEquals("Created 'Aspirin' of 'Tablets' unit with minimum threshold of 10.", histories.get(0));
@@ -60,7 +60,7 @@ public class CreateCommandTest {
         List<String> histories = new ArrayList<>();
         CreateCommand command = new CreateCommand("Aspirin", "Tablets", 10);
 
-        command.execute(inventory, ui, storage, histories);
+        command.execute(inventory, ui, histories);
 
         String fileContents = Files.readString(filePath);
         assertTrue(fileContents.contains("Item: Aspirin (Tablets) | 10"));
@@ -76,10 +76,10 @@ public class CreateCommandTest {
         CreateCommand firstCommand = new CreateCommand("Aspirin", "Tablets", 10);
         CreateCommand secondCommand = new CreateCommand("Aspirin", "Tablets", 10);
 
-        firstCommand.execute(inventory, ui, storage, histories);
+        firstCommand.execute(inventory, ui, histories);
 
         assertThrows(MediStockException.class,
-                () -> secondCommand.execute(inventory, ui, storage, histories));
+                () -> secondCommand.execute(inventory, ui, histories));
         assertEquals(1, inventory.getSize());
         assertEquals(1, histories.size());
     }

@@ -64,7 +64,7 @@ public class BatchTest {
         LocalDate date = LocalDate.parse("2028-06-07");
         BatchCommand command = new BatchCommand("Aspirin 500mg", 50, date);
 
-        command.execute(inventory, ui, storage, histories);
+        command.execute(inventory, ui, histories);
 
         InventoryItem updatedItem = inventory.getItem("Aspirin 500mg");
         assertEquals(50, updatedItem.getQuantity());
@@ -81,6 +81,6 @@ public class BatchTest {
         BatchCommand command = new BatchCommand("Aspirin 500mg", 50, date);
 
         assertThrows(MediStockException.class,
-                () -> command.execute(inventory, ui, storage, histories));
+                () -> command.execute(inventory, ui, histories));
     }
 }
