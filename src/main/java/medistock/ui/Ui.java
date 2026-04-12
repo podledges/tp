@@ -67,6 +67,39 @@ public class Ui {
         printLine();
     }
 
+
+    /**
+     * Displays a confirmation prompt to the user with the given message and
+     * repeatedly reads input until a valid response is received.
+     * Can be used anywhere a y/n confirmation is required before proceeding.
+     *
+     * @param message The context message to display before the confirmation prompt.
+     *                Should describe the action or warning requiring confirmation.
+     * @return {@code true} if the user confirms with "y", {@code false} if "n".
+     */
+    public boolean wasMessageConfirm(String message) {
+        String errorStr = message + System.lineSeparator() + "Do you want to continue anyways? (y/n)";
+        System.out.println(errorStr);
+        while (true) {
+            String confirmation = scanner.nextLine();
+
+            if (confirmation == null || confirmation.isBlank()) {
+                System.out.println("Input cannot be empty. Please enter y or n:");
+                continue;
+            }
+
+            String trimmed = confirmation.trim().toLowerCase();
+
+            if (trimmed.equals("y")) {
+                return true;
+            } else if (trimmed.equals("n")) {
+                return false;
+            } else {
+                System.out.println("Invalid input: \"" + trimmed + "\". Please enter y or n:");
+            }
+        }
+    }
+
     /**
      * Prints an error message.
      *
