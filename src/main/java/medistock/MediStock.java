@@ -18,14 +18,14 @@ import java.util.ArrayList;
  * Main class for the MediStock application.
  * Manages the initialization and execution of the inventory management system.
  */
-public class Medistock {
+public class MediStock {
     private Inventory inventory;
     private Ui ui;
     private Storage storage;
     private final HistoryStorage historyStorage;
     private List<String> histories;
 
-    public Medistock(Path filepath, String historyFilepath) {
+    public MediStock(Path filepath, String historyFilepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath);
         this.historyStorage = new HistoryStorage(historyFilepath);
@@ -81,7 +81,7 @@ public class Medistock {
     public static void main(String[] args) throws IOException, MediStockException {
         LogsCentre.initLogging();
 
-        Medistock mediStock = new Medistock(Path.of("./data/Inventory.txt"), "./data/History.txt");
+        MediStock mediStock = new MediStock(Path.of("./data/Inventory.txt"), "./data/History.txt");
         mediStock.boot();
     }
 }

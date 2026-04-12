@@ -5,10 +5,8 @@ import java.util.List;
 import medistock.exception.MediStockException;
 import medistock.inventory.Inventory;
 import medistock.inventory.InventoryItem;
-import medistock.storage.Storage;
 import medistock.ui.Ui;
 
-import java.io.IOException;
 
 /**
  * Command to create a new inventory item with specified name, unit, and minimum threshold.
@@ -25,16 +23,11 @@ public class CreateCommand extends Command {
     }
 
     @Override
-    public void execute(Inventory inventory, Ui ui, Storage storage, List<String> histories) throws MediStockException {
-        try {
+    public void execute(Inventory inventory, Ui ui, List<String> histories) throws MediStockException {
             InventoryItem item = new InventoryItem(name, unit, minimumThreshold);
             inventory.addItem(item);
-            storage.saveToFile(inventory);
             ui.printCreate(name, unit, minimumThreshold);
             histories.add(toHistoryString());
-        } catch (IOException e) {
-            throw new MediStockException("Failed to save to file: " + e.getMessage());
-        }
     }
 
     public String toHistoryString() {

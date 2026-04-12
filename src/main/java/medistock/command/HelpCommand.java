@@ -4,7 +4,6 @@ import java.util.List;
 
 import medistock.exception.MediStockException;
 import medistock.inventory.Inventory;
-import medistock.storage.Storage;
 import medistock.ui.Ui;
 
 /**
@@ -13,7 +12,7 @@ import medistock.ui.Ui;
 public class HelpCommand extends Command {
 
     @Override
-    public void execute(Inventory inventory, Ui ui, Storage storage, List<String> histories) throws MediStockException {
+    public void execute(Inventory inventory, Ui ui, List<String> histories) throws MediStockException {
         ui.printCommandList();
     }
 }

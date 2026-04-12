@@ -58,8 +58,9 @@ public class Parser {
         } else if (text.startsWith("remove-expired n/")) {
             return prepareRemoveExpired(text);
         } else {
-            throw new MediStockException("Unknown command: '" + input.split(" ")[0] + "'.\n"
-                    + "  - Type <help> to see all available commands");
+            throw new MediStockException("Invalid command: '" + input.split(" ")[0] + "'.\n"
+                    + "  - Type <help> to see all available command formats."
+                    + "  - Type <list> to view the current inventory state.");
         }
     }
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 import medistock.exception.MediStockException;
 import medistock.inventory.Inventory;
-import medistock.storage.Storage;
 import medistock.ui.Ui;
 
 import java.util.logging.Level;
@@ -25,7 +24,7 @@ public class ListCommand extends Command {
      * @throws MediStockException If an error occurs during execution.
      */
     @Override
-    public void execute(Inventory inventory, Ui ui, Storage storage,  List<String> histories)
+    public void execute(Inventory inventory, Ui ui, List<String> histories)
                     throws MediStockException {
         logger.log(Level.INFO, "Executing list command");
         ui.showInventoryList(inventory);
