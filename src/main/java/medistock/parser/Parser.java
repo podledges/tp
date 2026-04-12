@@ -23,6 +23,10 @@ import java.time.format.DateTimeParseException;
  * Parses user input and converts it into executable commands.
  */
 public class Parser {
+    private static final String DOSAGE_UNITS = "mcg|mg|g|kg|ml|l|iu|units?|tablets?|capsules?";
+    private static final String DOSAGE_PATTERN = "\\b\\d+(?:\\.\\d+)?\\s*(?:" + DOSAGE_UNITS + ")\\b";
+    private static final String DOSAGE_UNIT_PATTERN = "\\b(?:" + DOSAGE_UNITS + ")\\b";
+
     public static Command parseCommand(String input) throws MediStockException {
         String text = input.trim();
 
@@ -85,6 +89,14 @@ public class Parser {
      */
     private static String getMinimum(String text, int minIndex) {
         return text.substring(minIndex + 4).trim();
+    }
+
+    private static boolean hasDrugName(String name) {
+        String textWithoutDosage = name.toLowerCase()
+                .replaceAll(DOSAGE_PATTERN, " ")
+                .replaceAll(DOSAGE_UNIT_PATTERN, " ");
+
+        return textWithoutDosage.matches(".*[a-z].*");
     }
 
     private static int getNextIndex(String text, int currentIndex, int... indexes) {
@@ -177,6 +189,10 @@ public class Parser {
 
         if (name.isEmpty() || unit.isEmpty() || minText.isEmpty()) {
             throw new MediStockException("Name, unit, and minimum threshold must not be empty.");
+        }
+
+        if (!hasDrugName(name)) {
+            throw new MediStockException("Medication name must include a drug name.");
         }
 
         int min;

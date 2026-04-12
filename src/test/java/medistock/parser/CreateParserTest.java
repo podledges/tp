@@ -59,6 +59,14 @@ public class CreateParserTest {
     }
 
     @Test
+    void parseCommand_dosageOnlyName_throwsException() {
+        String input = "create n/ 100mg u/Tablets min/10";
+
+        assertThrows(MediStockException.class,
+                () -> Parser.parseCommand(input));
+    }
+
+    @Test
     void parseCommand_emptyUnit_throwsException() {
         String input = "create n/Aspirin u/ min/10";
 
