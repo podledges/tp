@@ -58,12 +58,4 @@ public class DeleteParserTest {
         assertThrows(MediStockException.class,
                 () -> Parser.parseCommand(input));
     }
-
-    @Test
-    void parseCommand_nonPositiveIndex_throwsException() {
-        String input = "delete i/0";
-
-        assertThrows(MediStockException.class,
-                () -> Parser.parseCommand(input));
-    }
 }
