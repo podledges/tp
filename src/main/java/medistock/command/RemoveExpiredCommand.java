@@ -1,12 +1,10 @@
 package medistock.command;
 
-import java.io.IOException;
 import java.util.List;
 
 import medistock.exception.MediStockException;
 import medistock.inventory.Inventory;
 import medistock.inventory.InventoryItem;
-import medistock.storage.Storage;
 import medistock.ui.Ui;
 
 public class RemoveExpiredCommand extends Command {
