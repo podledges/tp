@@ -38,11 +38,14 @@ public class BatchCommand extends Command {
             if (expiryDate.isBefore(LocalDate.now())) {
                 String errorMessage = "This batch is already expired (" + expiryDate + ").";
                 if (!ui.wasMessageConfirm(errorMessage)) {
+                    System.out.println("Batch not added.");
+                    ui.printAbortCommand();
                     return;
                 };
             }
             Batch newBatch = new Batch(batchNumber, quantity, expiryDate);
             item.addBatch(newBatch);
+            item.sortAndMarkExpiredBatches();
             ui.printBatch(inventory, item, quantity, expiryDate);
             histories.add(toHistoryString(item.getUnit()));
 

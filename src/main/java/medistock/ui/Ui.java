@@ -5,6 +5,7 @@ import medistock.inventory.Batch;
 import medistock.inventory.Inventory;
 import medistock.inventory.InventoryItem;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -77,29 +78,35 @@ public class Ui {
      *                Should describe the action or warning requiring confirmation.
      * @return {@code true} if the user confirms with "y", {@code false} if "n".
      */
-    public boolean wasMessageConfirm(String message) {
+    public boolean wasMessageConfirm(String message) throws IOException {
         String errorStr = message + System.lineSeparator() + "Do you want to continue anyways? (y/n)";
         System.out.println(errorStr);
+
+        if (scanner.hasNextLine() && System.in.available() == 0) {
+            // safer: just do a preemptive nextLine() drain if needed
+        }
+
         while (true) {
-            String confirmation = scanner.nextLine();
+            String confirmation = scanner.nextLine().trim().toLowerCase();
 
-            if (confirmation == null || confirmation.isBlank()) {
-                System.out.println("Input cannot be empty. Please enter y or n:");
-                continue;
-            }
-
-            String trimmed = confirmation.trim().toLowerCase();
-
-            if (trimmed.equals("y")) {
+            switch (confirmation) {
+            case "y":
                 return true;
-            } else if (trimmed.equals("n")) {
+            case "n":
                 return false;
-            } else {
-                System.out.println("Invalid input: \"" + trimmed + "\". Please enter y or n:");
+            case "":
+                System.out.println("Input cannot be empty. Please enter y or n:");
+                break;
+            default:
+                System.out.println("Invalid input: \"" + confirmation + "\". Please enter y or n:");
             }
         }
     }
 
+    public void printAbortCommand() {
+        System.out.println("Command Aborted");
+        printLine();
+    }
     /**
      * Prints an error message.
      *
