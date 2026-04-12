@@ -29,7 +29,7 @@ public class CreateCommand extends Command {
         try {
             InventoryItem item = new InventoryItem(name, unit, minimumThreshold);
             inventory.addItem(item);
-            storage.saveToFile(item);
+            storage.saveToFile(inventory);
             ui.printCreate(name, unit, minimumThreshold);
             histories.add(toHistoryString());
         } catch (IOException e) {

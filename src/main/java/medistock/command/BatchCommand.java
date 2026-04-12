@@ -49,7 +49,7 @@ public class BatchCommand extends Command {
             ui.printBatch(inventory, item, quantity, expiryDate);
             histories.add(toHistoryString(item.getUnit()));
 
-            storage.saveToFile(newBatch);
+            storage.saveToFile(inventory);
         } catch (IOException e) {
             throw new MediStockException("Failed to save to file: " + e.getMessage());
         }

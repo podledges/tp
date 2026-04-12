@@ -34,11 +34,6 @@ public class Storage {
      * @param data the data to be saved
      * @throws IOException if an Error occurs while reading the file
      */
-    public void saveToFile(Storable data) throws IOException {
-        FileWriter fw = new FileWriter(filePath.toFile(), true);
-        fw.write(data.toFileFormat() + System.lineSeparator());
-        fw.close();
-    }
 
     public void saveToFile(Inventory inventory) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath.toFile(), false))) {
