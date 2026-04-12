@@ -103,6 +103,7 @@ public class Inventory {
         assert batch != null : "Batch should not be null.";
         InventoryItem item = getItem(itemName);
         item.addBatch(batch);
+        item.sortAndMarkExpiredBatches();
         logger.log(Level.INFO, "Loaded/Added batch to existing item: " + item.getName());
     }
 

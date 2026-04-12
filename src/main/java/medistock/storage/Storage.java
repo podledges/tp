@@ -82,6 +82,7 @@ public class Storage {
                 inventory.addBatchToItem(currentItemName, newBatch);
             }
         }
+
     }
 
     public InventoryItem parseInventoryItem(String line) throws MediStockException {
