@@ -18,7 +18,7 @@ public class InventoryItem implements Storable {
     private final String unit;
     private final int minimumThreshold;
     private final List<Batch> batches;
-    private int nextBatchNumber = 1;
+    private int nextBatchNumber;
 
     /**
      * Creates an inventory item with the specified name, unit, and minimum
@@ -36,6 +36,15 @@ public class InventoryItem implements Storable {
         this.unit = unit;
         this.minimumThreshold = minimumThreshold;
         this.batches = new ArrayList<>();
+        this.nextBatchNumber = 1;
+    }
+
+    public InventoryItem(String name, String unit, int minimumThreshold, int nextBatchNumber) {
+        this.name = name;
+        this.unit = unit;
+        this.minimumThreshold = minimumThreshold;
+        this.batches = new ArrayList<>();
+        this.nextBatchNumber = nextBatchNumber;
     }
 
     public String getName() {
@@ -191,7 +200,7 @@ public class InventoryItem implements Storable {
 
     @Override
     public String toFileFormat() {
-        String descriptionLine = String.format("Item: %s (%s) | %d", this.name, this.unit, this.minimumThreshold);
+        String descriptionLine = String.format("Item: %s (%s) | %d | %d", this.name, this.unit, this.minimumThreshold, this.nextBatchNumber);
         return descriptionLine + System.lineSeparator() + "[Batches]";
     }
 

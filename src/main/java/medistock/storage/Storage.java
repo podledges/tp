@@ -80,7 +80,7 @@ public class Storage {
     }
 
     public InventoryItem parseInventoryItem(String line) throws MediStockException {
-        String regex = "Item: (.*?) \\((.*?)\\) \\| (\\d+)";
+        String regex = "Item: (.*?) \\((.*?)\\) \\| (\\d+) \\| (\\d+)";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(line);
         if (!matcher.find()) {
@@ -89,7 +89,8 @@ public class Storage {
         String name = matcher.group(1).trim();
         String unit = matcher.group(2).trim();
         int minThreshold = Integer.parseInt(matcher.group(3).trim());
-        return new InventoryItem(name, unit, minThreshold);
+        int nextBatchNumber = Integer.parseInt(matcher.group(4));
+        return new InventoryItem(name, unit, minThreshold, nextBatchNumber);
     }
 
     public Batch parseItemBatch(String line) throws MediStockException {
