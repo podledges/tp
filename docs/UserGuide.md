@@ -1,6 +1,6 @@
 # **User Guide**
 
-MediStock is a command-line inventory management application for pharmacists and clinical staff
+**MediStock** is a command-line inventory management application for pharmacists and clinical staff
 who need a fast way to track pharmaceutical stock. It helps users manage medications, monitor
 batch quantities and expiry dates, remove expired stock, and review inventory changes, all through
 efficient typed commands. MediStock is designed for expert users who prefer an efficient CLI workflow
