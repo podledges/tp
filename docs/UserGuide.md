@@ -55,9 +55,7 @@ Edits an existing medication entry. You can update its name, unit, minimum thres
     
 
 ### Listing the Inventory: `list`
-Shows all active and expired inventory items, together with their batch information and stock status.
->Healthy: stock is equal or above the minimum threshold. <br>
->Critical: stock is below the minimum threshold.
+Shows all active and expired inventory items, together with their batch information and stock status. <br> **Healthy:** stock is equal or above the minimum threshold. <br> **Critical:** stock is below the minimum threshold.
 
 * **Format:** `list`
 * **Example Output:**
@@ -80,7 +78,9 @@ Shows all active and expired inventory items, together with their batch informat
         Batch 1: 100 Capsules, Exp: 2024-01-15
     ____________________________________________________________
     ```
+>**Disclaimer:** Inventory sorting prioritizes expiration dates over batch numbers; hence, the batch at the top of the list is always the one closest to expiring.
 
+User-Centric (Action-Oriented) 
 ### Adding a Batch: `batch`
 Adds a batch to an existing medication entry. 
 * **Format:** `batch n/NAME q/QUANTITY d/EXPIRY_DATE`
@@ -91,13 +91,16 @@ Adds a batch to an existing medication entry.
     Batch of 200 Paracetamol 500mg, expiring on 2028-06-07
      has been successfully to the inventory!
     ____________________________________________________________
-    Stock of Paracetamol 500mg is now:
+    Current Active Pharmaceutical Inventory:
     1. Paracetamol 500mg (Min: 250)
-        Active Batches:
-            Batch 2: 200 Tablets, Exp: 2028-06-07
-            Batch 1: 200 Tablets, Exp: 2028-06-09
-        Total (active): 200 Tablets
-        Status: Critical
+        Batch 2: 400 Tablets, Exp: 2030-11-30
+        Batch 1: 300 Tablets, Exp: 2030-09-30
+        Total: 300 Tablets
+        Status: Healthy
+    ____________________________________________________________
+    Current Expired Pharmaceutical Inventory:
+    2. Vyvanse 70mg
+        Batch 1: 100 Capsules, Exp: 2024-01-15
     ____________________________________________________________
     ```
 > **Adding Expired Batches:** 

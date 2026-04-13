@@ -15,10 +15,10 @@
     - [Feature: List History](#feature-list-history)
     - [Feature: Remove Expired Batches](#feature-remove-expired-batches)
     - [Feature: Automatic Expiry Detection](#feature-automatic-expiry-detection)
-    - [Feature: Low Stock Warning](#feature-low-stock-warning)
     - [Feature: Help Command](#feature-help-command)
     - [Feature: Exit Command](#feature-exit-command)
-    - [Feature: Data Storage](#feature-data-storage)
+    - [Feature: Local Storage](#feature-local-storage)
+    - [Feature: Preserved Inventory](#feature-Preserved-Inventory)
 - [Product scope](#product-scope)
     - [Target user profile](#target-user-profile)
     - [Value proposition](#value-proposition)
@@ -542,12 +542,12 @@ illustrated together in a single sequence diagram.
 ![LocalStorage_SequenceDiagram.png](diagrams/LocalStorage_SequenceDiagram.png)
 <br>
 
-### Feature: Inventory Storage
+### Feature: Preserved Inventory Storage
 ![InventoryStorage_ClassDiagram.png](diagrams/InventoryStorage_ClassDiagram.png)
 ![StorageInitialization_SequenceDiagram.png](diagrams/StorageInitialization_SequenceDiagram.png)
 
 **Purpose:** Responsible for persisting the state of the `Inventory` to a local text file,
-and loading it back into memory upon application startup
+and loading it back into memory upon application startup, so that the inventory is saved in between sessions.
 
 <br>
 
