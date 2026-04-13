@@ -57,6 +57,8 @@ Edits an existing medication entry. You can update its name, unit, minimum thres
 
 ### Listing the Inventory: `list`
 Shows all active and expired inventory items, together with their batch information and stock status.
+Healthy: stock is equal or above the minimum threshold.
+Critical: stock is below the minimum threshold.
 
 * **Format:** `list`
 * **Example Output:**
@@ -69,7 +71,7 @@ Shows all active and expired inventory items, together with their batch informat
         Total: 300 Tablets
         Status: Healthy
 
-    2. Vyvanse 70mg (Min: 50)
+    2. Vyvanse 70mg (Min: 100)
         Batch 1: 60 Tablets, Exp: 2028-06-07
         Total: 60 Tablets
         Status: Critical
@@ -267,6 +269,12 @@ the earliest-expiring batch first.
 
 **Q:** Where can I find the index of the medical item?  
 **A:** The index is the number shown beside the item in the output of the `list` command.
+
+**Q:** Why is my stock healthy, but the withdraw command says I have insufficient stock to withdraw?
+**A:** The application only allows withdrawal from non-expired batches. A `Healthy` status only means the current stock 
+is above the medication’s minimum threshold. It does not guarantee that there is enough non-expired stock to fulfill 
+every withdrawal request. If the available non-expired stock is less than the requested quantity, the application will 
+show an insufficient stock message.
 
 ## Known Issues
 - NIL

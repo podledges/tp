@@ -32,40 +32,43 @@ public class Parser {
     public static Command parseCommand(String input) throws MediStockException {
         String text = input.trim();
 
-        if (isCommandInput(text, "create")) {
+        if (text.isEmpty()) {
+            throw new MediStockException("Command cannot be empty");
+        }
+        
+        // Extract command word (first word or phrase) and make it lowercase for case-insensitive matching
+        String commandWord = text.split("\\s+", 2)[0].toLowerCase();
+        
+        if (commandWord.equals("create")) {
             return prepareCreate(text);
-        } else if (isCommandInput(text, "edit")) {
+        } else if (commandWord.equals("edit")) {
             return prepareEdit(text);
-        } else if (isCommandInput(text, "batch")) {
+        } else if (commandWord.equals("batch")) {
             return prepareBatch(text);
-        } else if (isCommandInput(text, "withdraw")) {
+        } else if (commandWord.equals("withdraw")) {
             return prepareWithdraw(text);
-        } else if (isCommandInput(text, "delete")) {
+        } else if (commandWord.equals("delete")) {
             return prepareDelete(text);
-        } else if (text.equals("list")) {
+        } else if (commandWord.equals("list")) {
             return new ListCommand();
-        } else if (text.equals("history")) {
+        } else if (commandWord.equals("history")) {
             return new HistoryCommand();
-        } else if (text.startsWith("exit") || text.startsWith("quit")) {
+        } else if (commandWord.equals("exit") || commandWord.equals("quit")) {
             return new ExitCommand();
-        } else if (text.equals("find") || input.startsWith("find ")) {
+        } else if (commandWord.equals("find")) {
             String keyword = parseFind(text);
             return new FindCommand(keyword);
-        } else if (text.startsWith("help")) {
+        } else if (commandWord.equals("help")) {
             return new HelpCommand();
-        } else if (text.equals("remove-expired")) {
+        } else if (text.toLowerCase().equals("remove-expired")) {
             return new RemoveExpiredCommand();
-        } else if (text.startsWith("remove-expired n/")) {
+        } else if (text.toLowerCase().startsWith("remove-expired n/")) {
             return prepareRemoveExpired(text);
         } else {
             throw new MediStockException("Invalid command: '" + input.split(" ")[0] + "'.\n"
                     + "  - Type <help> to see all available command formats."
                     + "  - Type <list> to view the current inventory state.");
         }
-    }
-
-    private static boolean isCommandInput(String text, String commandWord) {
-        return text.equals(commandWord) || text.startsWith(commandWord + " ");
     }
 
     /**
