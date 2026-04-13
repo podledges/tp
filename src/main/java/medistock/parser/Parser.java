@@ -302,6 +302,12 @@ public class Parser {
             if (newName.isEmpty()) {
                 throw new MediStockException("New item name must not be empty.");
             }
+            if (!hasDrugName(newName)) {
+                throw new MediStockException("Medication name must include a drug name.");
+            }
+            if (hasNegativeDosage(newName)) {
+                throw new MediStockException("Medication must not include a negative dosage.");
+            }
         }
 
         if (unitIndex != -1) {
