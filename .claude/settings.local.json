@@ -4,7 +4,8 @@
       "Bash(bash /c/Users/manud/.claude/statusline-command.sh)",
       "Bash(cmd.exe //c \"where jq\")",
       "Bash(powershell.exe -Command \"\\(Get-Command jq\\).Source\")",
-      "Bash(powershell.exe:*)"
+      "Bash(powershell.exe:*)",
+      "Bash(./gradlew test:*)"
     ]
   },
   "outputStyle": "Explanatory"
