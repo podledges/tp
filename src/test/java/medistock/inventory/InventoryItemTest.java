@@ -11,6 +11,19 @@ import medistock.exception.MediStockException;
 public class InventoryItemTest {
 
     @Test
+    void addBatch_exceedIntMax_throwsException() throws MediStockException {
+        InventoryItem item = new InventoryItem("Aspirin 500mg", "Tablet", 200);
+
+        item.addBatch(new Batch(1, Integer.MAX_VALUE - 10, LocalDate.now().plusDays(30)));
+
+        MediStockException exception = assertThrows(MediStockException.class,
+                () -> item.addBatch(new Batch(2, 11, LocalDate.now().plusDays(31))));
+
+        assertEquals("Cannot add batch: Total quantity would exceed maximum allowed limit.",
+                exception.getMessage());
+    }
+
+    @Test
     void withdraw_singleBatch_reducesQuantity() throws MediStockException {
         InventoryItem item = new InventoryItem("Aspirin 500mg", "Tablet", 10);
         item.addBatch(new Batch(1, 20, LocalDate.now().plusDays(30)));
@@ -33,7 +46,7 @@ public class InventoryItemTest {
     }
 
     @Test
-    void withdraw_insufficientStock_throwsException() {
+    void withdraw_insufficientStock_throwsException() throws MediStockException {
         InventoryItem item = new InventoryItem("Aspirin 500mg", "Tablet", 10);
         item.addBatch(new Batch(1, 5, LocalDate.now().plusDays(30)));
 
@@ -54,7 +67,7 @@ public class InventoryItemTest {
     }
 
     @Test
-    void withdraw_insufficientValidStock_throwsException() {
+    void withdraw_insufficientValidStock_throwsException() throws MediStockException {
         InventoryItem item = new InventoryItem("Aspirin 500mg", "Tablet", 10);
         item.addBatch(new Batch(1, 10, LocalDate.now().minusDays(1)));
         item.addBatch(new Batch(2, 5, LocalDate.now().plusDays(10)));
@@ -67,7 +80,7 @@ public class InventoryItemTest {
     }
 
     @Test
-    void withdraw_allStockExpired_doesNotWithdrawFromExpiredBatch() {
+    void withdraw_allStockExpired_doesNotWithdrawFromExpiredBatch() throws MediStockException {
         InventoryItem item = new InventoryItem("Paracetamol 500mg", "Tablets", 10);
         item.addBatch(new Batch(1, 10, LocalDate.now().minusDays(1)));
 

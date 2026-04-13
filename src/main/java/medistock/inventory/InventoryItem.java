@@ -106,8 +106,15 @@ public class InventoryItem implements Storable {
      * to the item's total quantity.
      *
      * @param batch The batch to add to this inventory item.
+     * @throws MediStockException If adding the batch would cause integer overflow.
      */
-    public void addBatch(Batch batch) {
+    public void addBatch(Batch batch) throws MediStockException {
+        // Check for integer overflow before adding
+        int currentTotal = getQuantity();
+        if (Integer.MAX_VALUE - currentTotal < batch.getQuantity()) {
+            throw new MediStockException("Cannot add batch: Total quantity would exceed maximum allowed limit.");
+        }
+        
         batches.add(batch);
 
         if (batch.getBatchNumber() >= nextBatchNumber) {
@@ -115,7 +122,7 @@ public class InventoryItem implements Storable {
         }
     }
 
-    public InventoryItem copyWithMetadata(String name, String unit, int minimumThreshold) {
+    public InventoryItem copyWithMetadata(String name, String unit, int minimumThreshold) throws MediStockException {
         InventoryItem updatedItem = new InventoryItem(name, unit, minimumThreshold);
         for (Batch batch : batches) {
             updatedItem.addBatch(batch);
