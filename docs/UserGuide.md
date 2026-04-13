@@ -36,8 +36,7 @@ Creates a new medication entry so its stock can be tracked.
     Minimum threshold: 250
     ____________________________________________________________
     ```
-    
-<div style="page-break-after: always;"></div>
+
 
 ### Editing a Medication: `edit`
 Edits an existing medication entry. You can update its name, unit, minimum threshold, or any combination of these.

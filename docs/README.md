@@ -2,7 +2,7 @@
 > MediStock is a command-line inventory system for pharmacists and clinical staff
 > to track and manage their pharmaceutical stock! <br>
 > 
-![MediStock-V1.0-Showcase](docs/MediStock-UI-Example.png)
+![MediStock-V2.1-Showcase](diagrams/MediStock-UI-Example.png)
 
 ### Useful links 
 * **[User Guide](UserGuide.md)**
