@@ -34,7 +34,7 @@ public class Parser {
 
         if (isCommandInput(text, "create")) {
             return prepareCreate(text);
-        } else if (text.startsWith("edit ")) {
+        } else if (isCommandInput(text, "edit")) {
             return prepareEdit(text);
         } else if (text.startsWith("batch ")) {
             return prepareBatch(text);
