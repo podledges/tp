@@ -214,7 +214,13 @@ public class InventoryItem implements Storable {
     }
 
     public int removeExpiredBatches() {
-        sortAndMarkExpiredBatches();
+        LocalDate today = LocalDate.now();
+        batches.sort(Comparator.comparing(Batch::getExpiryDate));
+        for (Batch batch : batches) {
+            if (batch.getExpiryDate().isBefore(today) && !batch.isExpired()) {
+                batch.markExpired();
+            }
+        }
         List<Batch> expired = getExpiredBatches();
         int count = expired.size();
         batches.removeAll(expired);
