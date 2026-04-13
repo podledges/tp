@@ -319,7 +319,7 @@ If the inventory is empty, prints "Your inventory is empty."
 5. Displays batch-level details including batch number, quantity, unit, and expiry date
 
 **Failure cases & messages:**
-- None (arguments are ignored)
+- None (No arguments allowed)
 - If inventory is empty: "Your inventory is empty."
 - If no active batches: "No active batches found."
 - If no expired batches: "No expired batches found."
@@ -492,7 +492,7 @@ Prints an enumerated list of all available commands with their syntax formats.
    - Format strings for commands that require parameters
 
 **Failure cases & messages:**
-- None (arguments are ignored)
+- None (No arguments allowed)
 
 **Logging:**
 - INFO on command entry/exit (to be implemented)
