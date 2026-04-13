@@ -71,7 +71,7 @@ Critical: stock is below the minimum threshold.
         Total: 300 Tablets
         Status: Healthy
 
-    2. Vyvanse 70mg (Min: 50)
+    2. Vyvanse 70mg (Min: 100)
         Batch 1: 60 Tablets, Exp: 2028-06-07
         Total: 60 Tablets
         Status: Critical
