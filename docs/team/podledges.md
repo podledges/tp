@@ -1,6 +1,4 @@
 # Ayden van Etten - Project Portfolio Page
-[RepoSense link](https://nus-cs2113-ay2526-s2.github.io/tp-dashboard/?search=podledges&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2026-02-20T00%3A00%3A00&filteredFileName=
-)
 
 ## Overview
 MediStock is a desktop inventory management application for clinics and pharmacies. It is optimized for users who prefer working with a Command Line Interface (CLI), and supports tracking medicine items, batches, expiry dates, withdrawals, and command history.
@@ -65,3 +63,4 @@ I focused my Developer Guide contributions on breaking down the core architectur
 - **Peer support and mentorship:** Offered direct help to teammates privately when it felt right to do so, and had also very swiftly replied whenever a teammate had a question, keeping team progress unblocked outside  scheduled meeting hours.
 - **Repository setup:** Created the team organization fork, configured the repository, and assigned all teammates as owners, ensuring the team could begin development without any onboarding friction.
 - **Team cohesion:** Consistently initiated and enforced regularity of team meetings during our scheduled weekly sessions, and contributed ideas for features during discussions — including the suggestion to track rather than automatically remove expired medications, which shaped a core product decision.
+
